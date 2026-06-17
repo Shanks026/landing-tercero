@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tercero — The all-in-one platform for social media agencies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #fff;
+      color: #0a0a0a;
+      font-family: 'Geist', system-ui, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .app-font { font-family: 'Geist', system-ui, sans-serif; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 9999px; }
+
+    /* ── Reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+
+    /* ── Layout ── */
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+    @media(max-width:600px) { .wrap { padding: 0 20px; } }
+
+    /* ── Navbar ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 22px 0;
+      transition: background 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-color: #f0f0f0;
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-right-group { display: flex; align-items: center; gap: 28px; }
+    .logo {
+      display: flex; align-items: center; gap: 9px;
+      font-weight: 600; font-size: 17px; letter-spacing: -0.02em;
+      color: #0a0a0a; text-decoration: none;
+    }
+    .logo-mark {
+      width: 28px; height: 28px; background: #0a0a0a; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: #fff; letter-spacing: -0.04em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: #888; font-size: 14px; font-weight: 400; text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: #0a0a0a; }
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+    .btn-ghost { background: none; border: none; color: #888; font-size: 14px; font-weight: 400; cursor: pointer; padding: 8px 14px; border-radius: 8px; transition: color 0.2s; font-family: inherit; }
+    .btn-ghost:hover { color: #0a0a0a; }
+    .btn-dark { background: #0a0a0a; color: #fff; border: none; padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; transition: opacity 0.2s; font-family: inherit; letter-spacing: -0.01em; }
+    .btn-dark:hover { opacity: 0.8; }
+
+    /* ── Hero ── */
+    .hero { padding: 100px 0 0; }
+    .hero-center { text-align: center; max-width: 660px; margin: 0 auto; }
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 12px; font-weight: 500; color: #166534; letter-spacing: 0.02em;
+      background: #dcfce7; border-radius: 100px; padding: 5px 12px 5px 8px;
+      margin-bottom: 20px;
+    }
+    .hero-label .badge-dot {
+      display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+      background: #16a34a; flex-shrink: 0;
+    }
+    h1 {
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+      font-size: clamp(38px, 5vw, 68px);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      color: #0a0a0a;
+      margin-bottom: 18px;
+    }
+    h1 em { font-style: normal; color: #aaa; }
+    .hero-sub {
+      font-size: 16px; color: #555; line-height: 1.7; max-width: 480px;
+      font-weight: 400; margin: 0 auto 28px;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: #0a0a0a; color: #fff; border: none; padding: 14px 26px;
+      border-radius: 9px; font-size: 15px; font-weight: 500; cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s; font-family: inherit;
+      letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 7px;
+    }
+    .btn-primary:hover { opacity: 0.82; transform: translateY(-1px); }
+    .btn-secondary {
+      background: none; color: #666; border: 1px solid #e5e5e5; padding: 14px 26px;
+      border-radius: 9px; font-size: 15px; font-weight: 400; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s; font-family: inherit;
+    }
+    .btn-secondary:hover { border-color: #bbb; color: #0a0a0a; }
+    .hero-footnote { font-size: 12px; color: #ccc; margin-top: 14px; }
+
+    /* ── Hamburger ── */
+    .hamburger { display:none; background:none; border:none; cursor:pointer; padding:6px; color:#0a0a0a; }
+    .drawer-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.25); z-index:300; backdrop-filter:blur(2px); }
+    .drawer { position:fixed; top:0; right:0; bottom:0; width:260px; background:#fff; z-index:400; padding:24px 20px; box-shadow:-8px 0 40px rgba(0,0,0,0.08); display:flex; flex-direction:column; }
+    .drawer-close { align-self:flex-end; background:none; border:none; cursor:pointer; padding:4px; color:#888; margin-bottom:24px; }
+    .drawer-links { list-style:none; display:flex; flex-direction:column; gap:4px; }
+    .drawer-links a { display:block; font-size:16px; font-weight:500; color:#0a0a0a; text-decoration:none; padding:10px 8px; border-radius:8px; transition:background 0.15s; }
+    .drawer-links a:hover { background:#f5f5f5; }
+    .drawer-divider { height:1px; background:#f0f0f0; margin:16px 0; }
+
+    /* ── Hero Visual ── */
+    .hero-visual {
+      position: relative;
+      margin-top: 36px;
+      border: 1px solid #f0f0f0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 40px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02);
+    }
+    .hero-visual::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hv-bar {
+      background: #fafafa;
+      border-bottom: 1px solid #f0f0f0;
+      padding: 12px 16px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .hv-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .hv-url {
+      flex: 1; margin: 0 12px; background: #f0f0f0; border-radius: 5px;
+      padding: 5px 10px; display: flex; align-items: center;
+    }
+    .hv-url span { font-size: 11px; color: #aaa; font-family: monospace; }
+    .hv-body { display: flex; min-height: 420px; }
+    .hv-sidebar {
+      width: 220px; border-right: 1px solid #f5f5f5; padding: 20px 0;
+      flex-shrink: 0;
+    }
+    .hv-nav-label { font-size: 10px; font-weight: 600; color: #ccc; text-transform: uppercase; letter-spacing: 0.08em; padding: 0 18px; margin-bottom: 6px; margin-top: 16px; }
+    .hv-nav-label:first-child { margin-top: 0; }
+    .hv-nav-item {
+      display: flex; align-items: center; gap: 9px; padding: 8px 18px;
+      font-size: 13px; color: #aaa; cursor: pointer; transition: background 0.15s;
+      border-radius: 0;
+    }
+    .hv-nav-item.active { background: #f7f7f7; color: #0a0a0a; font-weight: 500; }
+    .hv-nav-item svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .hv-main { flex: 1; padding: 24px; overflow: hidden; }
+    .hv-page-title { font-size: 16px; font-weight: 600; color: #0a0a0a; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .hv-page-sub { font-size: 12px; color: #aaa; margin-bottom: 20px; }
+    .hv-cards { display: flex; flex-direction: column; gap: 8px; }
+    .hv-card {
+      border: 1px solid #f0f0f0; border-radius: 10px; padding: 14px 16px;
+      display: flex; align-items: center; gap: 12px; background: #fff;
+      transition: border-color 0.2s;
+    }
+    .hv-card:hover { border-color: #e0e0e0; }
+    .plat { width: 24px; height: 24px; border-radius: 6px; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .p-ig { background: linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); color: #fff; }
+    .p-li { background: #0077b5; color: #fff; }
+    .p-x  { background: #000; color: #fff; }
+    .hv-card-info { flex: 1; min-width: 0; }
+    .hv-card-client { font-size: 13px; font-weight: 500; color: #0a0a0a; }
+    .hv-card-preview { font-size: 12px; color: #aaa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+    .pill {
+      font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 9999px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .pill-pending { background: #fff8ed; color: #e08000; border: 1px solid #ffe4b5; }
+    .pill-approved { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+    .pill-draft { background: #f5f5f5; color: #aaa; border: 1px solid #e5e5e5; }
+    .pill-revision { background: #fff5f5; color: #dc2626; border: 1px solid #fecaca; }
+    .hv-card-ver { font-size: 10px; color: #ccc; margin-top: 2px; }
+
+    /* ── Divider ── */
+    .divider { height: 1px; background: #f5f5f5; }
+
+    /* ── Section base ── */
+    .section { padding: 60px 0; }
+    .section-sm { padding: 40px 0; }
+
+    /* ── Eyebrow ── */
+    .eyebrow {
+      font-size: 12px; font-weight: 500; color: #777; letter-spacing: 0.06em;
+      text-transform: uppercase; margin-bottom: 16px; display: block;
+    }
+
+    /* ── Section titles ── */
+    h2 {
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 800; line-height: 1.1; letter-spacing: -0.03em;
+      color: #0a0a0a; margin-bottom: 14px;
+    }
+    h2 em { font-style: normal; color: #999; }
+    .lead { font-size: 16px; color: #555; line-height: 1.7; font-weight: 400; max-width: 500px; }
+
+    /* ── Problem ── */
+    .problem-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 0; border: 1px solid #f0f0f0; border-radius: 14px; overflow: hidden;
+      margin-top: 56px;
+    }
+    .prob-item {
+      padding: 36px 32px; border-right: 1px solid #f0f0f0;
+      transition: background 0.2s;
+    }
+    .prob-item:last-child { border-right: none; }
+    .prob-item:hover { background: #fafafa; }
+    .prob-num {
+      font-family: 'Instrument Serif', Georgia, serif; font-size: 42px; color: #bbb;
+      line-height: 1; margin-bottom: 14px; font-weight: 400; font-style: normal;
+    }
+    .prob-title { font-size: 15px; font-weight: 500; color: #0a0a0a; margin-bottom: 8px; letter-spacing: -0.01em; }
+    .prob-desc { font-size: 14px; color: #666; line-height: 1.6; font-weight: 400; }
+
+    /* ── Approval section ── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: start; }
+    .split.rev { direction: rtl; }
+    .split.rev > * { direction: ltr; }
+
+    .check-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .check-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #555; line-height: 1.55; font-weight: 400; }
+    .check-list li svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 3px; stroke: #0a0a0a; fill: none; }
+
+    /* ── Approval flow card ── */
+    .flow-card {
+      border: 1px solid #f0f0f0; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 1px 20px rgba(0,0,0,0.04);
+    }
+    .flow-header { padding: 20px 24px; border-bottom: 1px solid #f5f5f5; }
+    .flow-title { font-size: 13px; font-weight: 500; color: #0a0a0a; letter-spacing: -0.01em; }
+    .flow-sub { font-size: 12px; color: #bbb; margin-top: 2px; }
+    .flow-body { padding: 20px 24px; }
+    .flow-step {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid #f8f8f8;
+    }
+    .flow-step:last-child { border-bottom: none; padding-bottom: 0; }
+    .flow-n {
+      width: 22px; height: 22px; border-radius: 50%; background: #f5f5f5;
+      color: #bbb; font-size: 11px; font-weight: 600; display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+    }
+    .flow-n.done { background: #f0fdf4; color: #16a34a; }
+    .flow-n.active { background: #0a0a0a; color: #fff; }
+    .flow-step-text { flex: 1; }
+    .flow-step-label { font-size: 13px; font-weight: 500; color: #0a0a0a; }
+    .flow-step-desc { font-size: 12px; color: #bbb; margin-top: 2px; line-height: 1.5; }
+    .flow-link {
+      display: flex; align-items: center; gap: 8px; background: #fafafa;
+      border: 1px solid #f0f0f0; border-radius: 8px; padding: 10px 14px; margin-top: 16px;
+    }
+    .flow-link-url { font-size: 11px; color: #aaa; font-family: monospace; flex: 1; }
+    .flow-copy { font-size: 11px; font-weight: 500; color: #0a0a0a; cursor: pointer; white-space: nowrap; }
+
+    /* ── Features grid ── */
+    .feat-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0; border-top: 1px solid #f0f0f0; margin-top: 56px;
+    }
+    .feat-item {
+      padding: 32px 28px; border-right: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0; transition: background 0.2s;
+    }
+    .feat-item:nth-child(4n) { border-right: none; }
+    .feat-item:hover { background: #fafafa; }
+    .feat-icon {
+      width: 32px; height: 32px; border-radius: 8px; border: 1px solid #f0f0f0;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+    }
+    .feat-icon svg { width: 15px; height: 15px; stroke: #666; fill: none; stroke-width: 1.7; }
+    .feat-name { font-size: 14px; font-weight: 500; color: #0a0a0a; margin-bottom: 6px; letter-spacing: -0.01em; }
+    .feat-desc { font-size: 13px; color: #666; line-height: 1.55; font-weight: 400; }
+
+    /* ── Finance visual ── */
+    .fin-card {
+      border: 1px solid #f0f0f0; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 1px 20px rgba(0,0,0,0.04);
+    }
+    .fin-header { padding: 20px 24px; border-bottom: 1px solid #f5f5f5; display: flex; align-items: center; justify-content: space-between; }
+    .fin-title { font-size: 13px; font-weight: 500; color: #0a0a0a; }
+    .fin-body { padding: 20px 24px; }
+    .kpi-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .kpi { background: #fafafa; border: 1px solid #f0f0f0; border-radius: 10px; padding: 16px; }
+    .kpi-label { font-size: 11px; color: #bbb; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .kpi-val { font-family: 'Instrument Serif', serif; font-size: 26px; color: #0a0a0a; line-height: 1; font-weight: 400; }
+    .kpi-trend { font-size: 11px; color: #16a34a; margin-top: 4px; font-weight: 500; }
+    .kpi-trend.warn { color: #e08000; }
+    .inv-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid #f8f8f8;
+    }
+    .inv-item:last-child { border-bottom: none; }
+    .inv-num { font-size: 11px; color: #ccc; font-family: monospace; width: 90px; flex-shrink: 0; }
+    .inv-client { flex: 1; font-size: 13px; color: #0a0a0a; font-weight: 400; }
+    .inv-amt { font-size: 13px; font-weight: 500; color: #0a0a0a; font-family: 'Instrument Serif', serif; }
+
+    /* ── Pricing ── */
+    .price-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 16px; margin-top: 56px;
+    }
+    .price-card {
+      border: 1px solid #f0f0f0; border-radius: 16px; padding: 32px;
+      transition: border-color 0.3s, transform 0.3s; position: relative;
+    }
+    .price-card:hover { border-color: #ddd; transform: translateY(-3px); }
+    .price-card.featured { border-color: #0a0a0a; background: #0a0a0a; }
+    .price-card.featured:hover { border-color: #000; }
+    .feat-label {
+      position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+      background: #0a0a0a; color: #fff; font-size: 10px; font-weight: 600;
+      padding: 3px 12px; border-radius: 9999px; white-space: nowrap; letter-spacing: 0.04em;
+    }
+    .plan-tier { font-size: 12px; font-weight: 500; color: #bbb; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+    .plan-tier.light { color: rgba(255,255,255,0.4); }
+    .plan-price {
+      font-family: 'Instrument Serif', serif; font-size: 42px; color: #0a0a0a;
+      line-height: 1; letter-spacing: -0.02em; margin-bottom: 4px; font-weight: 400;
+    }
+    .plan-price.light { color: #fff; }
+    .plan-per { font-size: 13px; color: #777; margin-bottom: 6px; font-weight: 400; }
+    .plan-per.light { color: rgba(255,255,255,0.5); }
+    .plan-clients { font-size: 12px; color: #777; margin-bottom: 24px; font-weight: 400; }
+    .plan-clients.light { color: rgba(255,255,255,0.4); }
+    .pdiv { height: 1px; background: #f0f0f0; margin-bottom: 22px; }
+    .pdiv.light { background: rgba(255,255,255,0.1); }
+    .plan-feats { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 28px; }
+    .plan-feats li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #555; font-weight: 400; }
+    .plan-feats li.light { color: rgba(255,255,255,0.65); }
+    .plan-feats li svg { width: 13px; height: 13px; stroke: #bbb; fill: none; stroke-width: 2.5; flex-shrink: 0; margin-top: 2px; }
+    .plan-feats li.light svg { stroke: rgba(255,255,255,0.5); }
+    .plan-btn {
+      width: 100%; padding: 12px; border-radius: 9px; font-size: 14px; font-weight: 500;
+      cursor: pointer; font-family: inherit; transition: all 0.2s; letter-spacing: -0.01em;
+    }
+    .plan-btn-outline { background: none; color: #0a0a0a; border: 1px solid #e5e5e5; }
+    .plan-btn-outline:hover { border-color: #bbb; }
+    .plan-btn-white { background: #fff; color: #0a0a0a; border: none; }
+    .plan-btn-white:hover { opacity: 0.9; }
+
+    /* ── Platforms ── */
+    .plat-section { padding: 64px 0; border-top: 1px solid #f5f5f5; }
+    .plat-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .plat-tag {
+      display: flex; align-items: center; gap: 6px; font-size: 13px; color: #bbb;
+      padding: 8px 16px; border: 1px solid #f0f0f0; border-radius: 9999px;
+      transition: border-color 0.2s, color 0.2s; font-weight: 400;
+    }
+    .plat-tag:hover { border-color: #ddd; color: #666; }
+    .plat-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+    /* ── Final CTA ── */
+    .final { padding: 80px 0; text-align: center; background: #fafafa; }
+    .final h2 { max-width: 640px; margin: 0 auto 16px; }
+    .final p { color: #666; font-size: 16px; margin-bottom: 36px; font-weight: 400; }
+    .final-note { font-size: 12px; color: #ccc; margin-top: 14px; }
+
+    /* ── Footer ── */
+    footer { padding: 56px 0 36px; border-top: 1px solid #f5f5f5; }
+    .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .foot-brand-desc { font-size: 14px; color: #888; line-height: 1.65; margin-top: 12px; max-width: 240px; font-weight: 400; }
+    .foot-col-title { font-size: 11px; font-weight: 600; color: #bbb; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+    .foot-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .foot-links a { font-size: 14px; color: #888; text-decoration: none; transition: color 0.2s; font-weight: 400; }
+    .foot-links a:hover { color: #0a0a0a; }
+    .foot-bottom { border-top: 1px solid #f5f5f5; padding-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+    .foot-legal { font-size: 12px; color: #ddd; }
+
+    /* ── Responsive ── */
+    @media(max-width:1024px) {
+      .feat-grid { grid-template-columns: repeat(2,1fr); }
+      .feat-item:nth-child(4n) { border-right: 1px solid #f0f0f0; }
+      .feat-item:nth-child(2n) { border-right: none; }
+      .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .hv-sidebar { display: none; }
+    }
+    @media(max-width:768px) {
+      nav .nav-links { display: none; }
+      .nav-right { display: none; }
+      .hamburger { display: flex; }
+      .hero-visual { display: none; }
+      .split { grid-template-columns: 1fr; gap: 40px; }
+      .split.rev { direction: ltr; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .prob-item { border-right: none; border-bottom: 1px solid #f0f0f0; }
+      .prob-item:last-child { border-bottom: none; }
+      .price-grid { grid-template-columns: 1fr; }
+      .foot-grid { grid-template-columns: 1fr; gap: 28px; }
+      .feat-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:480px) {
+      .feat-grid { grid-template-columns: 1fr; }
+      .feat-item:nth-child(2n) { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel" data-presets="react">
+  const { useState, useEffect } = React;
+
+  function useReveal() {
+    useEffect(() => {
+      const els = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver(
+        entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+        { threshold: 0.1 }
+      );
+      els.forEach(el => io.observe(el));
+      return () => io.disconnect();
+    }, []);
+  }
+
+  // Icons — self-contained SVGs
+  const S = {width:15,height:15,stroke:'currentColor',fill:'none',strokeWidth:1.7,strokeLinecap:'round',strokeLinejoin:'round'};
+  const Ic = {
+    Check:   () => <svg {...S} viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>,
+    Users:   () => <svg {...S} viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+    File:    () => <svg {...S} viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>,
+    Check2:  () => <svg {...S} viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>,
+    Dollar:  () => <svg {...S} viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>,
+    Cal:     () => <svg {...S} viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
+    Msg:     () => <svg {...S} viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+    Zap:     () => <svg {...S} viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+    Target:  () => <svg {...S} viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
+    Send:    () => <svg {...S} viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>,
+    Arrow:   () => <svg {...S} viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>,
+  };
+  const wrapIcon = (Icon) => (
+    <svg viewBox="0 0 24 24" strokeWidth={1.7} stroke="currentColor" fill="none" style={{width:15,height:15}}>
+      <Icon/>
+    </svg>
+  );
+
+  // ── Logo ────────────────────────────────────────────────────────
+  const LOGO_PATH_ICON = "M29.9246 24.7192C30.3288 25.4185 29.8241 26.2934 29.0164 26.2934H1.05055C0.242798 26.2934 -0.261835 25.4185 0.142351 24.7192L4.96364 16.3774H25.1043L29.9246 24.7192ZM14.1257 0.523857C14.5298 -0.1745 15.5383 -0.174739 15.9422 0.523857L23.5877 13.7543H6.47927L14.1257 0.523857Z";
+  const LOGO_PATH_TEXT = "M52.9314 0.626727V3.97473H46.2714V25.6467H42.1674V3.97473H35.4714V0.626727H52.9314ZM73.4677 15.2427C73.4677 15.9867 73.4197 16.6587 73.3237 17.2587H58.1677C58.2877 18.8427 58.8757 20.1147 59.9317 21.0747C60.9877 22.0347 62.2837 22.5147 63.8197 22.5147C66.0277 22.5147 67.5877 21.5907 68.4997 19.7427H72.9277C72.3277 21.5667 71.2357 23.0667 69.6517 24.2427C68.0917 25.3947 66.1477 25.9707 63.8197 25.9707C61.9237 25.9707 60.2197 25.5507 58.7077 24.7107C57.2197 23.8467 56.0437 22.6467 55.1797 21.1107C54.3397 19.5507 53.9197 17.7507 53.9197 15.7107C53.9197 13.6707 54.3277 11.8827 55.1437 10.3467C55.9837 8.78673 57.1477 7.58673 58.6357 6.74673C60.1477 5.90673 61.8757 5.48673 63.8197 5.48673C65.6917 5.48673 67.3597 5.89473 68.8237 6.71073C70.2877 7.52673 71.4277 8.67873 72.2437 10.1667C73.0597 11.6307 73.4677 13.3227 73.4677 15.2427ZM69.1837 13.9467C69.1597 12.4347 68.6197 11.2227 67.5637 10.3107C66.5077 9.39873 65.1997 8.94273 63.6397 8.94273C62.2237 8.94273 61.0117 9.39873 60.0037 10.3107C58.9957 11.1987 58.3957 12.4107 58.2037 13.9467H69.1837ZM79.8104 8.69073C80.4104 7.68273 81.2024 6.90273 82.1864 6.35073C83.1944 5.77473 84.3824 5.48673 85.7504 5.48673V9.73473H84.7064C83.0984 9.73473 81.8744 10.1427 81.0344 10.9587C80.2184 11.7747 79.8104 13.1907 79.8104 15.2067V25.6467H75.7064V5.81073H79.8104V8.69073ZM86.3549 15.7107C86.3549 13.6707 86.7629 11.8827 87.5789 10.3467C88.4189 8.78673 89.5709 7.58673 91.0349 6.74673C92.4989 5.90673 94.1789 5.48673 96.0749 5.48673C98.4749 5.48673 100.455 6.06273 102.015 7.21473C103.599 8.34273 104.667 9.96273 105.219 12.0747H100.791C100.431 11.0907 99.8549 10.3227 99.0629 9.77073C98.2709 9.21873 97.2749 8.94273 96.0749 8.94273C94.3949 8.94273 93.0509 9.54273 92.0429 10.7427C91.0589 11.9187 90.5669 13.5747 90.5669 15.7107C90.5669 17.8467 91.0589 19.5147 92.0429 20.7147C93.0509 21.9147 94.3949 22.5147 96.0749 22.5147C98.4509 22.5147 100.023 21.4707 100.791 19.3827H105.219C104.643 21.3987 103.563 23.0067 101.979 24.2067C100.395 25.3827 98.4269 25.9707 96.0749 25.9707C94.1789 25.9707 92.4989 25.5507 91.0349 24.7107C89.5709 23.8467 88.4189 22.6467 87.5789 21.1107C86.7629 19.5507 86.3549 17.7507 86.3549 15.7107ZM125.689 15.2427C125.689 15.9867 125.641 16.6587 125.545 17.2587H110.389C110.509 18.8427 111.097 20.1147 112.153 21.0747C113.209 22.0347 114.505 22.5147 116.041 22.5147C118.249 22.5147 119.809 21.5907 120.721 19.7427H125.149C124.549 21.5667 123.457 23.0667 121.873 24.2427C120.313 25.3947 118.369 25.9707 116.041 25.9707C114.145 25.9707 112.441 25.5507 110.929 24.7107C109.441 23.8467 108.265 22.6467 107.401 21.1107C106.561 19.5507 106.141 17.7507 106.141 15.7107C106.141 13.6707 106.549 11.8827 107.365 10.3467C108.205 8.78673 109.369 7.58673 110.857 6.74673C112.369 5.90673 114.097 5.48673 116.041 5.48673C117.913 5.48673 119.581 5.89473 121.045 6.71073C122.509 7.52673 123.649 8.67873 124.465 10.1667C125.281 11.6307 125.689 13.3227 125.689 15.2427ZM121.405 13.9467C121.381 12.4347 120.841 11.2227 119.785 10.3107C118.729 9.39873 117.421 8.94273 115.861 8.94273C114.445 8.94273 113.233 9.39873 112.225 10.3107C111.217 11.1987 110.617 12.4107 110.425 13.9467H121.405ZM132.032 8.69073C132.632 7.68273 133.424 6.90273 134.408 6.35073C135.416 5.77473 136.604 5.48673 137.972 5.48673V9.73473H136.928C135.32 9.73473 134.096 10.1427 133.256 10.9587C132.44 11.7747 132.032 13.1907 132.032 15.2067V25.6467H127.928V5.81073H132.032V8.69073ZM148.548 25.9707C146.676 25.9707 144.984 25.5507 143.472 24.7107C141.96 23.8467 140.772 22.6467 139.908 21.1107C139.044 19.5507 138.612 17.7507 138.612 15.7107C138.612 13.6947 139.056 11.9067 139.944 10.3467C140.832 8.78673 142.044 7.58673 143.58 6.74673C145.116 5.90673 146.832 5.48673 148.728 5.48673C150.624 5.48673 152.34 5.90673 153.876 6.74673C155.412 7.58673 156.624 8.78673 157.512 10.3467C158.4 11.9067 158.844 13.6947 158.844 15.7107C158.844 17.7267 158.388 19.5147 157.476 21.0747C156.564 22.6347 155.316 23.8467 153.732 24.7107C152.172 25.5507 150.444 25.9707 148.548 25.9707ZM148.548 22.4067C149.604 22.4067 150.588 22.1547 151.5 21.6507C152.436 21.1467 153.192 20.3907 153.768 19.3827C154.344 18.3747 154.632 17.1507 154.632 15.7107C154.632 14.2707 154.356 13.0587 153.804 12.0747C153.252 11.0667 152.52 10.3107 151.608 9.80673C150.696 9.30273 149.712 9.05073 148.656 9.05073C147.6 9.05073 146.616 9.30273 145.704 9.80673C144.816 10.3107 144.108 11.0667 143.58 12.0747C143.052 13.0587 142.788 14.2707 142.788 15.7107C142.788 17.8467 143.328 19.5027 144.408 20.6787C145.512 21.8307 146.892 22.4067 148.548 22.4067Z";
+  function LogoSVG({ width=130 }) {
+    return (
+      <svg width={width} height={Math.round(width * 27/162)} viewBox="0 0 162 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d={LOGO_PATH_ICON} fill="black"/>
+        <path d={LOGO_PATH_TEXT} fill="black"/>
+      </svg>
+    );
+  }
+
+  // ── Navbar ──────────────────────────────────────────────────────
+  function Navbar() {
+    const [scrolled, setScrolled] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    useEffect(() => {
+      const fn = () => setScrolled(window.scrollY > 20);
+      window.addEventListener('scroll', fn);
+      return () => window.removeEventListener('scroll', fn);
+    }, []);
+    return (
+      <>
+        <nav className={scrolled ? 'scrolled' : ''}>
+          <div className="wrap">
+            <div className="nav-inner">
+              <a href="#" style={{textDecoration:'none',display:'flex',alignItems:'center'}}>
+                <LogoSVG width={88}/>
+              </a>
+              <div className="nav-right-group">
+                <ul className="nav-links">
+                  <li><a href="#features">Features</a></li>
+                  <li><a href="#how">How it works</a></li>
+                  <li><a href="#pricing">Pricing</a></li>
+                </ul>
+                <div className="nav-right">
+                  <button className="btn-ghost">Log in</button>
+                  <button className="btn-dark">Start free trial</button>
+                </div>
+              </div>
+              {/* Mobile hamburger */}
+              <button className="hamburger" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
+                <svg viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" fill="none" style={{width:22,height:22}}>
+                  <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </nav>
+
+        {/* Mobile drawer */}
+        {drawerOpen && (
+          <>
+            <div className="drawer-overlay" onClick={() => setDrawerOpen(false)}/>
+            <div className="drawer">
+              <button className="drawer-close" onClick={() => setDrawerOpen(false)}>
+                <svg viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" fill="none" style={{width:20,height:20}}>
+                  <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+              <a href="#" style={{marginBottom:24,textDecoration:'none',display:'block'}}>
+                <LogoSVG/>
+              </a>
+              <ul className="drawer-links">
+                <li><a href="#features" onClick={() => setDrawerOpen(false)}>Features</a></li>
+                <li><a href="#how" onClick={() => setDrawerOpen(false)}>How it works</a></li>
+                <li><a href="#pricing" onClick={() => setDrawerOpen(false)}>Pricing</a></li>
+              </ul>
+              <div className="drawer-divider"/>
+              <ul className="drawer-links">
+                <li><a href="#">Log in</a></li>
+                <li><a href="#" style={{color:'#4f46e5',fontWeight:600}}>Start free trial</a></li>
+              </ul>
+            </div>
+          </>
+        )}
+      </>
+    );
+  }
+
+  // ── Hero ────────────────────────────────────────────────────────
+  function Hero() {
+    return (
+      <section className="hero">
+        <div className="wrap">
+          {/* Centered copy */}
+          <div className="hero-center">
+            <div className="hero-label">
+              <span className="badge-dot"/>
+              14-day free trial · No credit card required
+            </div>
+            <h1>
+              Content, clients,<br/>
+              invoices — <em>one place.</em>
+            </h1>
+            <p className="hero-sub">
+              Tercero replaces the fragmented stack of Notion, spreadsheets, approval emails, and accounting tools. From lead to invoice, without switching tabs.
+            </p>
+            <div className="hero-actions" style={{justifyContent:'center'}}>
+              <button className="btn-primary">
+                Start free trial
+                <svg viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" fill="none" style={{width:15,height:15}}>
+                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
+              <button className="btn-secondary">See how it works</button>
+            </div>
+          </div>
+
+          {/* Full-width dashboard below */}
+          <DashboardMockup/>
+        </div>
+      </section>
+    );
+  }
+
+  // ── Dashboard Mockup — real screenshot ──────────────────────────
+  function DashboardMockup() {
+    return (
+      <div className="hero-visual" style={{marginTop:0}}>
+        <div className="hv-bar">
+          <div className="hv-dot" style={{background:'#ff5f57'}}/>
+          <div className="hv-dot" style={{background:'#ffbd2e'}}/>
+          <div className="hv-dot" style={{background:'#28c840'}}/>
+          <div className="hv-url"><span>app.tercero.co/dashboard</span></div>
+        </div>
+        <img src="./dashboard.png" alt="Tercero Dashboard" style={{width:'100%',display:'block',borderRadius:'0 0 14px 14px'}}/>
+      </div>
+    );
+  }
+
+  function _OldDashboardMockup_unused() {
+    const navItems = [
+      { label:'Dashboard', active:true,  d:'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
+      { label:'My Organization', d:'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z' },
+      { label:'Clients', d:'M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z' },
+      { label:'Prospects', d:'M22 12h-4l-3 9L9 3l-3 9H2' },
+      { label:'Proposals', d:'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' },
+      { label:'Campaigns', d:'M13 2L3 14h9l-1 8 10-12h-9z' },
+      { label:'Operations', d:'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5', ch:true },
+      { label:'Calendar', d:'M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z' },
+      { label:'Finance', d:'M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6', ch:true },
+    ];
+
+    return (
+      <div className="hero-visual" style={{marginTop:0}}>
+        <div className="hv-bar">
+          <div className="hv-dot" style={{background:'#ff5f57'}}/><div className="hv-dot" style={{background:'#ffbd2e'}}/><div className="hv-dot" style={{background:'#28c840'}}/>
+          <div className="hv-url"><span>app.tercero.co/dashboard</span></div>
+        </div>
+
+        <div style={{display:'flex',height:520,overflow:'hidden',fontFamily:f,fontSize:12}}>
+
+          {/* ── Sidebar ── */}
+          <div style={{width:210,borderRight:'1px solid #f0f0f0',display:'flex',flexDirection:'column',flexShrink:0,background:'#fff'}}>
+            <div style={{padding:'10px 12px',borderBottom:'1px solid #f5f5f5',display:'flex',alignItems:'center',gap:8}}>
+              <div style={{width:28,height:28,background:'#7c4a1e',borderRadius:6,display:'flex',alignItems:'center',justifyContent:'center',fontSize:13,flexShrink:0}}>☕</div>
+              <div style={{flex:1,minWidth:0}}>
+                <div style={{fontSize:12,fontWeight:600,color:'#0a0a0a',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>Soko - Coffee Ho...</div>
+                <div style={{fontSize:9,color:'#22c55e',fontWeight:600}}>quantum</div>
+              </div>
+            </div>
+
+            <div style={{flex:1,padding:'8px',overflowY:'auto'}}>
+              <div style={{fontSize:9,fontWeight:600,color:'#bbb',textTransform:'uppercase',letterSpacing:'.07em',padding:'2px 6px',marginBottom:3}}>Navigation</div>
+              {navItems.map((n,i) => (
+                <div key={i} style={{display:'flex',alignItems:'center',gap:7,padding:'6px',borderRadius:6,marginBottom:1,background:n.active?'#f5f5f5':'transparent'}}>
+                  <NI d={n.d} active={!!n.active}/>
+                  <span style={{fontSize:12,color:n.active?'#0a0a0a':'#555',fontWeight:n.active?500:400,flex:1}}>{n.label}</span>
+                  {n.ch && <svg viewBox="0 0 24 24" strokeWidth={2} stroke="#ccc" fill="none" style={{width:10,height:10}}><polyline points="9 18 15 12 9 6"/></svg>}
+                </div>
+              ))}
+
+              <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'2px 6px',marginTop:8,marginBottom:3}}>
+                <div style={{fontSize:9,fontWeight:600,color:'#bbb',textTransform:'uppercase',letterSpacing:'.07em'}}>Clients</div>
+                <svg viewBox="0 0 24 24" strokeWidth={2} stroke="#ccc" fill="none" style={{width:9,height:9}}><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+              {[{name:'Soko - Coffee House',bg:'#7c4a1e',l:'S'},{name:'Sinister six',bg:'#dc2626',l:'S'}].map((c,i)=>(
+                <div key={i} style={{display:'flex',alignItems:'center',gap:7,padding:'5px 6px',borderRadius:6,marginBottom:1}}>
+                  <div style={{width:18,height:18,background:c.bg,borderRadius:4,display:'flex',alignItems:'center',justifyContent:'center',fontSize:8,fontWeight:700,color:'#fff',flexShrink:0}}>{c.l}</div>
+                  <span style={{fontSize:12,color:'#555'}}>{c.name}</span>
+                </div>
+              ))}
+            </div>
+
+            <div style={{borderTop:'1px solid #f5f5f5',padding:'6px 8px'}}>
+              <div style={{display:'flex',alignItems:'center',gap:7,padding:'5px 6px',borderRadius:6}}>
+                <svg viewBox="0 0 24 24" strokeWidth={1.6} stroke="#aaa" fill="none" style={{width:13,height:13}}><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                <span style={{fontSize:12,color:'#888'}}>Billing &amp; Usage</span>
+              </div>
+              <div style={{display:'flex',alignItems:'center',gap:7,padding:'5px 6px',borderRadius:6}}>
+                <svg viewBox="0 0 24 24" strokeWidth={1.6} stroke="#aaa" fill="none" style={{width:13,height:13}}><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+                <span style={{fontSize:12,color:'#888'}}>Settings</span>
+              </div>
+              <div style={{display:'flex',alignItems:'center',gap:7,padding:'5px 6px',marginTop:2,borderTop:'1px solid #f5f5f5'}}>
+                <div style={{width:24,height:24,background:'#e5e5e5',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:9,fontWeight:700,color:'#666',flexShrink:0}}>CA</div>
+                <div style={{flex:1,minWidth:0}}>
+                  <div style={{fontSize:11,fontWeight:500,color:'#0a0a0a'}}>Chris Austin A</div>
+                  <div style={{fontSize:9,color:'#bbb',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>chrisaustin2001@gmail.com</div>
+                </div>
+                <svg viewBox="0 0 24 24" strokeWidth={2} stroke="#ccc" fill="none" style={{width:10,height:10}}><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Main ── */}
+          <div style={{flex:1,display:'flex',flexDirection:'column',overflow:'hidden',background:'#fff'}}>
+            <div style={{padding:'10px 20px',borderBottom:'1px solid #f5f5f5',display:'flex',alignItems:'center',justifyContent:'space-between',flexShrink:0}}>
+              <span style={{fontSize:13,fontWeight:600,color:'#0a0a0a'}}>Dashboard</span>
+              <svg viewBox="0 0 24 24" strokeWidth={1.6} stroke="#bbb" fill="none" style={{width:14,height:14}}><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+            </div>
+
+            <div style={{flex:1,padding:'16px 20px',overflowY:'auto',display:'flex',flexDirection:'column',gap:10}}>
+              {/* Greeting */}
+              <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between'}}>
+                <div>
+                  <div style={{fontSize:19,fontWeight:700,color:'#0a0a0a',letterSpacing:'-.02em'}}>Up and at it, Chris. ☕</div>
+                  <div style={{fontSize:11,color:'#aaa',marginTop:2}}>Start the week with a short list and a clear head.</div>
+                </div>
+                <div style={{fontSize:11,color:'#bbb'}}>Monday, June 8th</div>
+              </div>
+
+              {/* KPI cards */}
+              <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:8}}>
+                {[
+                  {label:'NET PROFIT (MO)', val:'+₹17,000', sub:'68.0% margin', vc:'#22c55e', ic:'#22c55e', id:'M22 12h-4l-3 9L9 3l-3 9H2'},
+                  {label:'REVENUE (MO)', val:'₹25,000', sub:'Cash received this month', vc:'#0a0a0a', ic:'#888', id:'M23 6l-9.5 9.5-5-5L1 18'},
+                  {label:'EXPENSES (MO)', val:'₹8,000', sub:'Subscriptions + One-offs', vc:'#0a0a0a', ic:'#f87171', id:'M23 18l-9.5-9.5-5 5L1 6'},
+                  {label:'ACTIVE CLIENTS', val:'1', sub:'Excluding internal operations', vc:'#0a0a0a', ic:'#60a5fa', id:'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z'},
+                ].map((k,i)=>(
+                  <div key={i} style={{border:'1px solid #f0f0f0',borderRadius:9,padding:'12px'}}>
+                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:8}}>
+                      <div style={{fontSize:8,fontWeight:700,color:'#bbb',letterSpacing:'.06em',textTransform:'uppercase',lineHeight:1.4}}>{k.label}</div>
+                      <div style={{width:20,height:20,borderRadius:5,background:'#f8f8f8',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+                        <svg viewBox="0 0 24 24" strokeWidth={2} stroke={k.ic} fill="none" style={{width:10,height:10}}><path d={k.id}/></svg>
+                      </div>
+                    </div>
+                    <div style={{fontSize:16,fontWeight:700,color:k.vc,letterSpacing:'-.02em',lineHeight:1,marginBottom:3}}>{k.val}</div>
+                    <div style={{fontSize:9,color:'#bbb'}}>{k.sub}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Row 2: Meetings | Workflow Health | Week Ahead */}
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:8}}>
+
+                {/* Meetings */}
+                <div style={{border:'1px solid #f0f0f0',borderRadius:9,padding:'12px'}}>
+                  <div style={{display:'flex',gap:4,marginBottom:10}}>
+                    {['Meetings','Notes'].map((t,i)=>(
+                      <div key={i} style={{fontSize:10,fontWeight:i===0?500:400,color:i===0?'#0a0a0a':'#aaa',padding:'3px 8px',border:i===0?'1px solid #e5e5e5':'1px solid transparent',borderRadius:5}}>{t}</div>
+                    ))}
+                    <div style={{marginLeft:'auto',display:'flex',gap:4}}>
+                      {['+','↗'].map((s,i)=><span key={i} style={{fontSize:11,color:'#bbb',cursor:'pointer'}}>{s}</span>)}
+                    </div>
+                  </div>
+                  {/* Meeting card */}
+                  <div style={{border:'1px solid #f0f0f0',borderRadius:7,padding:'10px'}}>
+                    <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:5}}>
+                      <div style={{display:'flex',gap:7,alignItems:'flex-start'}}>
+                        <div style={{background:'#f5f5f5',borderRadius:5,padding:'4px 6px',textAlign:'center',flexShrink:0}}>
+                          <div style={{fontSize:7,color:'#888',textTransform:'uppercase',letterSpacing:'.04em'}}>JUN</div>
+                          <div style={{fontSize:13,fontWeight:700,color:'#0a0a0a',lineHeight:1}}>10</div>
+                        </div>
+                        <div>
+                          <div style={{fontSize:11,fontWeight:600,color:'#0a0a0a',lineHeight:1.3}}>Team Analysis and Deadline</div>
+                          <div style={{fontSize:9,color:'#aaa',marginTop:2}}>⏰ 7:00 PM</div>
+                        </div>
+                      </div>
+                      <span style={{fontSize:9,background:'#f0fdf4',color:'#16a34a',border:'1px solid #bbf7d0',padding:'2px 5px',borderRadius:9999,whiteSpace:'nowrap',fontWeight:500}}>In 2 Days</span>
+                    </div>
+                    <div style={{fontSize:10,color:'#888',lineHeight:1.5,marginBottom:6}}>Preparation and enquiry about the Team Analysis and Deadline for Sept 26</div>
+                    <div style={{display:'flex',alignItems:'center',gap:5}}>
+                      <div style={{width:13,height:13,background:'#dc2626',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:7,color:'#fff',fontWeight:700}}>S</div>
+                      <span style={{fontSize:10,color:'#888'}}>Sinister six</span>
+                      <span style={{fontSize:9,color:'#ccc',marginLeft:'auto'}}>10 June 2026</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Workflow Health */}
+                <div style={{border:'1px solid #f0f0f0',borderRadius:9,padding:'12px'}}>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
+                    <div style={{fontSize:12,fontWeight:600,color:'#0a0a0a'}}>Workflow Health</div>
+                    <span style={{fontSize:10,color:'#bbb'}}>↗</span>
+                  </div>
+                  <div style={{fontSize:10,color:'#bbb',marginBottom:6}}>Pipeline distribution across all clients</div>
+                  <div style={{display:'flex',justifyContent:'center'}}>
+                    <svg viewBox="0 0 110 65" style={{width:100,height:58}}>
+                      <path d="M8 57 A47 47 0 0 1 102 57" fill="none" stroke="#f0f0f0" strokeWidth="10" strokeLinecap="round"/>
+                      <path d="M8 57 A47 47 0 0 1 102 57" fill="none" stroke="#3b82f6" strokeWidth="10" strokeLinecap="round" strokeDasharray="148" strokeDashoffset="111"/>
+                      <path d="M8 57 A47 47 0 0 1 102 57" fill="none" stroke="#22c55e" strokeWidth="10" strokeLinecap="round" strokeDasharray="111 37" strokeDashoffset="37"/>
+                      <text x="55" y="50" textAnchor="middle" fontSize="15" fontWeight="700" fill="#0a0a0a">4</text>
+                      <text x="55" y="60" textAnchor="middle" fontSize="6" fill="#bbb" letterSpacing=".5">DELIVERABLES</text>
+                    </svg>
+                  </div>
+                  {[{l:'Draft',c:'#3b82f6',n:1},{l:'Pending Approval',c:'#f97316',n:0},{l:'Approved',c:'#22c55e',n:0},{l:'Needs Revision',c:'#f43f5e',n:0},{l:'Scheduled',c:'#a855f7',n:0},{l:'Published',c:'#16a34a',n:3}].map((r,i)=>(
+                    <div key={i} style={{display:'flex',alignItems:'center',gap:5,marginBottom:3}}>
+                      <div style={{width:6,height:6,borderRadius:'50%',background:r.c,flexShrink:0}}/>
+                      <div style={{fontSize:10,color:'#888',flex:1}}>{r.l}</div>
+                      <div style={{fontSize:10,color:'#bbb',fontWeight:500}}>{r.n}</div>
+                    </div>
+                  ))}
+                  <div style={{display:'flex',alignItems:'center',gap:4,marginTop:5,borderTop:'1px solid #f5f5f5',paddingTop:5}}>
+                    <svg viewBox="0 0 24 24" strokeWidth={2} stroke="#22c55e" fill="none" style={{width:10,height:10}}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span style={{fontSize:10,color:'#16a34a',fontWeight:500}}>Pipeline is looking good!</span>
+                  </div>
+                </div>
+
+                {/* Week Ahead */}
+                <div style={{border:'1px solid #f0f0f0',borderRadius:9,padding:'12px'}}>
+                  <div style={{display:'flex',justifyContent:'space-between'}}>
+                    <div style={{fontSize:12,fontWeight:600,color:'#0a0a0a'}}>Week Ahead</div>
+                    <span style={{fontSize:10,color:'#bbb'}}>↗</span>
+                  </div>
+                  <div style={{fontSize:10,color:'#bbb',marginBottom:10}}>0 deliverables · 1 meeting · 0 reminders</div>
+                  {[
+                    {day:'Today', date:'8 June', ev:null},
+                    {day:'Tomorrow', date:'9 June', ev:null},
+                    {day:'Wednesday', date:'10 June', ev:{t:'Team Analysis and Deadline',time:'7:00PM'}},
+                    {day:'Thursday', date:'11 June', ev:null},
+                    {day:'Friday', date:'12 June', ev:null},
+                  ].map((d,i)=>(
+                    <div key={i} style={{display:'flex',gap:7,marginBottom:7}}>
+                      <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:1,flexShrink:0}}>
+                        <div style={{width:6,height:6,borderRadius:'50%',background:i===0?'#22c55e':'#e5e5e5',marginTop:2}}/>
+                        {i<4 && <div style={{width:1,height:12,background:'#f0f0f0'}}/>}
+                      </div>
+                      <div>
+                        <div style={{fontSize:10,fontWeight:d.ev?500:400,color:d.ev?'#0a0a0a':'#888'}}>{d.day} <span style={{color:'#bbb',fontWeight:400}}>{d.date}</span></div>
+                        {d.ev
+                          ? <div style={{fontSize:9,color:'#555',display:'flex',alignItems:'center',gap:2,marginTop:1}}>
+                              <svg viewBox="0 0 24 24" strokeWidth={2} stroke="#bbb" fill="none" style={{width:8,height:8}}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                              {d.ev.t} · {d.ev.time}
+                            </div>
+                          : <div style={{fontSize:9,color:'#ccc',marginTop:1}}>No activity</div>
+                        }
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Row 3: Profitability | Lifetime Revenue | Social Media */}
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:8}}>
+
+                {/* Profitability Trend */}
+                <div style={{border:'1px solid #f0f0f0',borderRadius:9,padding:'12px'}}>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:2}}>
+                    <div style={{fontSize:12,fontWeight:600,color:'#0a0a0a'}}>Profitability Trend</div>
+                    <div style={{display:'flex',gap:3}}>
+                      {['3M','6M','12M'].map((t,i)=>(
+                        <span key={i} style={{fontSize:8,padding:'2px 4px',borderRadius:3,background:i===0?'#f0f0f0':'transparent',color:i===0?'#0a0a0a':'#bbb',fontWeight:i===0?600:400}}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div style={{fontSize:9,color:'#bbb',marginBottom:6}}>Cash Collected vs Expenses (Last 3 Months)</div>
+                  <svg viewBox="0 0 190 80" style={{width:'100%',height:68}}>
+                    {[{v:'₹25k',y:5},{v:'₹13k',y:27},{v:'₹7k',y:45},{v:'₹0',y:63}].map((g,i)=>(
+                      <g key={i}>
+                        <line x1="28" y1={g.y} x2="185" y2={g.y} stroke="#f5f5f5" strokeWidth="0.5"/>
+                        <text x="24" y={g.y+3} fontSize="6" fill="#ccc" textAnchor="end">{g.v}</text>
+                      </g>
+                    ))}
+                    {/* Apr — near 0 */}
+                    <rect x="40" y="61" width="9" height="3" fill="#22c55e" rx="1"/>
+                    <rect x="51" y="62" width="9" height="2" fill="#f87171" rx="1"/>
+                    {/* May — small */}
+                    <rect x="95" y="58" width="9" height="6" fill="#22c55e" rx="1"/>
+                    <rect x="106" y="59" width="9" height="5" fill="#f87171" rx="1"/>
+                    {/* Jun — tall */}
+                    <rect x="150" y="10" width="9" height="54" fill="#22c55e" rx="1"/>
+                    <rect x="161" y="38" width="9" height="26" fill="#f87171" rx="1"/>
+                    <text x="50" y="75" fontSize="7" fill="#bbb" textAnchor="middle">Apr</text>
+                    <text x="105" y="75" fontSize="7" fill="#bbb" textAnchor="middle">May</text>
+                    <text x="160" y="75" fontSize="7" fill="#bbb" textAnchor="middle">Jun</text>
+                  </svg>
+                  <div style={{display:'flex',gap:10,justifyContent:'center',marginTop:3}}>
+                    {[{c:'#22c55e',l:'Revenue'},{c:'#f87171',l:'Expenses'}].map((g,i)=>(
+                      <div key={i} style={{display:'flex',alignItems:'center',gap:4,fontSize:9,color:'#888'}}>
+                        <div style={{width:8,height:3,borderRadius:9999,background:g.c}}/>
+                        {g.l}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Lifetime Revenue donut */}
+                <div style={{border:'1px solid #f0f0f0',borderRadius:9,padding:'12px'}}>
+                  <div style={{fontSize:12,fontWeight:600,color:'#0a0a0a',marginBottom:2}}>Lifetime Revenue</div>
+                  <div style={{fontSize:9,color:'#bbb',marginBottom:6}}>Total revenue vs expenses</div>
+                  <div style={{display:'flex',justifyContent:'center',marginBottom:6}}>
+                    <svg viewBox="0 0 100 100" style={{width:84,height:84}}>
+                      <circle cx="50" cy="50" r="36" fill="none" stroke="#f87171" strokeWidth="13"/>
+                      <circle cx="50" cy="50" r="36" fill="none" stroke="#22c55e" strokeWidth="13"
+                        strokeDasharray="163 63" strokeDashoffset="0" transform="rotate(-90 50 50)"/>
+                      <text x="50" y="47" textAnchor="middle" fontSize="12" fontWeight="700" fill="#0a0a0a">₹25K</text>
+                      <text x="50" y="57" textAnchor="middle" fontSize="7" fill="#bbb">Total Revenue</text>
+                    </svg>
+                  </div>
+                  <div style={{textAlign:'center',fontSize:10,color:'#22c55e',fontWeight:600,marginBottom:4}}>68.0% profit margin ↗</div>
+                  <div style={{display:'flex',justifyContent:'center',gap:8}}>
+                    <div style={{fontSize:9,color:'#22c55e'}}>● ₹17,000 profit</div>
+                    <div style={{fontSize:9,color:'#f87171'}}>● ₹8,000 expenses</div>
+                  </div>
+                </div>
+
+                {/* Social Media Usage */}
+                <div style={{border:'1px solid #f0f0f0',borderRadius:9,padding:'12px'}}>
+                  <div style={{fontSize:12,fontWeight:600,color:'#0a0a0a',marginBottom:2}}>Social Media Usage</div>
+                  <div style={{fontSize:9,color:'#bbb',marginBottom:10}}>Deliverable distribution across platforms</div>
+                  {[
+                    {icon:'IG',label:'Instagram',color:'#e1306c',n:3},
+                    {icon:'in',label:'LinkedIn',color:'#0077b5',n:3},
+                    {icon:'fb',label:'Facebook',color:'#1877f2',n:2},
+                    {icon:'X',label:'X / Twitter',color:'#000',n:2},
+                    {icon:'YT',label:'YouTube',color:'#ff0000',n:0},
+                  ].map((p,i)=>(
+                    <div key={i} style={{display:'flex',alignItems:'center',gap:6,marginBottom:7}}>
+                      <div style={{width:16,height:16,borderRadius:4,background:p.color,display:'flex',alignItems:'center',justifyContent:'center',fontSize:7,fontWeight:700,color:'#fff',flexShrink:0}}>{p.icon}</div>
+                      <div style={{flex:1,background:'#f5f5f5',borderRadius:3,height:8,overflow:'hidden'}}>
+                        <div style={{width:p.n>0?`${(p.n/3)*100}%`:'2px',height:'100%',background:p.color,borderRadius:3}}/>
+                      </div>
+                      <div style={{fontSize:10,color:'#888',width:8,textAlign:'right',flexShrink:0}}>{p.n}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Recent Invoices */}
+              <div style={{border:'1px solid #f0f0f0',borderRadius:9,padding:'12px'}}>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:10}}>
+                  <div>
+                    <div style={{fontSize:12,fontWeight:600,color:'#0a0a0a'}}>Recent Invoices</div>
+                    <div style={{fontSize:9,color:'#bbb',marginTop:1}}>Latest billed items across all clients</div>
+                  </div>
+                  <span style={{fontSize:10,color:'#888',fontWeight:500}}>View All ↗</span>
+                </div>
+                <div style={{display:'grid',gridTemplateColumns:'1fr 1.2fr 1fr 0.8fr 0.6fr',gap:0,borderBottom:'1px solid #f5f5f5',paddingBottom:5,marginBottom:5}}>
+                  {['Invoice #','Client','Issue Date','Amount','Status'].map((h,i)=>(
+                    <div key={i} style={{fontSize:9,fontWeight:600,color:'#bbb',textTransform:'uppercase',letterSpacing:'.04em'}}>{h}</div>
+                  ))}
+                </div>
+                <div style={{display:'grid',gridTemplateColumns:'1fr 1.2fr 1fr 0.8fr 0.6fr',gap:0,alignItems:'center'}}>
+                  <div style={{display:'flex',alignItems:'center',gap:5,fontSize:11,color:'#555'}}>
+                    <svg viewBox="0 0 24 24" strokeWidth={1.5} stroke="#bbb" fill="none" style={{width:12,height:12}}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                    INV-2026-004
+                  </div>
+                  <div style={{display:'flex',alignItems:'center',gap:5,fontSize:11,color:'#0a0a0a',fontWeight:500}}>
+                    <div style={{width:14,height:14,background:'#dc2626',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:7,color:'#fff',fontWeight:700,flexShrink:0}}>S</div>
+                    Sinister six
+                  </div>
+                  <div style={{fontSize:11,color:'#555'}}>Jun 8, 2026</div>
+                  <div style={{fontSize:11,fontWeight:600,color:'#0a0a0a'}}>₹15,000</div>
+                  <span style={{fontSize:10,fontWeight:500,padding:'3px 8px',borderRadius:9999,background:'#eff6ff',color:'#3b82f6',border:'1px solid #bfdbfe',display:'inline-flex',alignItems:'center',gap:3}}>
+                    <svg viewBox="0 0 24 24" strokeWidth={2} stroke="#3b82f6" fill="none" style={{width:9,height:9}}><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    Sent
+                  </span>
+                </div>
+              </div>
+
+              {/* Client Content Health */}
+              <div style={{border:'1px solid #f0f0f0',borderRadius:9,padding:'12px'}}>
+                <div style={{fontSize:12,fontWeight:600,color:'#0a0a0a',marginBottom:2}}>Client Content Health</div>
+                <div style={{fontSize:9,color:'#bbb',marginBottom:10}}>Content status across all active clients</div>
+                <div style={{display:'flex',gap:8}}>
+                  <div style={{border:'1px solid #f0f0f0',borderRadius:8,padding:'12px',width:180}}>
+                    <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:8}}>
+                      <div style={{width:22,height:22,background:'#dc2626',borderRadius:5,display:'flex',alignItems:'center',justifyContent:'center',fontSize:10,color:'#fff',fontWeight:700}}>S</div>
+                      <div>
+                        <div style={{fontSize:11,fontWeight:600,color:'#0a0a0a'}}>Sinister six</div>
+                        <span style={{fontSize:8,fontWeight:700,color:'#d97706',letterSpacing:'.04em',textTransform:'uppercase'}}>● NEEDS ATTENTION</span>
+                      </div>
+                    </div>
+                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:4}}>
+                      <span style={{fontSize:10,color:'#888'}}>Pipeline</span>
+                      <span style={{fontSize:10,fontWeight:500,color:'#0a0a0a'}}>1 post</span>
+                    </div>
+                    <div style={{display:'flex',justifyContent:'space-between'}}>
+                      <span style={{fontSize:10,color:'#888'}}>Next Drop</span>
+                      <span style={{fontSize:10,fontWeight:500,color:'#0a0a0a'}}>in 4 days</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  } // end _OldDashboardMockup_unused
+
+  // ── Problem ──────────────────────────────────────────────────────
+  function Problem() {
+    return (
+      <section className="section" style={{paddingTop:60}}>
+        <div className="wrap">
+          <div className="reveal" style={{maxWidth:520}}>
+            <span className="eyebrow">The problem</span>
+            <h2>Too many tools.<br/><em>Not enough clarity.</em></h2>
+            <p className="lead">Agencies juggle five apps to do one job. Tercero collapses all of it into one structured workspace.</p>
+          </div>
+          <div className="problem-grid reveal d2">
+            <div className="prob-item">
+              <div className="prob-num">01</div>
+              <div className="prob-title">Approvals over WhatsApp</div>
+              <div className="prob-desc">Feedback buried in threads. Nothing tracked. Nothing versioned. Changes get lost.</div>
+            </div>
+            <div className="prob-item">
+              <div className="prob-num">02</div>
+              <div className="prob-title">Briefs in five different places</div>
+              <div className="prob-desc">Notion for tasks, Google Docs for briefs, email for feedback, Slack for urgent revisions.</div>
+            </div>
+            <div className="prob-item">
+              <div className="prob-num">03</div>
+              <div className="prob-title">Invoices in Excel</div>
+              <div className="prob-desc">Manual invoice builds, payment tracking in spreadsheets, chasing overdue clients with copy-pasted emails.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ── Approval Dive ────────────────────────────────────────────────
+  function ApprovalDive() {
+    return (
+      <section className="section" id="how">
+        <div className="divider"/>
+        <div className="wrap" style={{paddingTop:48}}>
+          <div className="split">
+            <div className="reveal">
+              <span className="eyebrow">Content approvals</span>
+              <h2>Clients approve<br/><em>without an account.</em></h2>
+              <p className="lead">Send a versioned magic link. Your client sees the post exactly as it'll appear — and clicks Approve or leaves a note. No login. No friction.</p>
+              <ul className="check-list">
+                {[
+                  'Platform previews: Instagram, LinkedIn, X, YouTube',
+                  'Every revision saved as a new version automatically',
+                  'Client feedback captured inline — no email thread needed',
+                  'You see approval or revision request in real time',
+                  'Full version history: who approved what, and when',
+                ].map((t, i) => (
+                  <li key={i}>
+                    <svg viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" fill="none" style={{width:14,height:14,flexShrink:0,marginTop:3}}>
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="reveal d2">
+              <div className="flow-card">
+                <div className="flow-header">
+                  <div className="flow-title">Content approval flow</div>
+                  <div className="flow-sub">Bloom Studio · Instagram post · v2</div>
+                </div>
+                <div className="flow-body">
+                  {[
+                    { n:'1', label:'Draft post', desc:'Write caption, select platform, attach media.', state:'done' },
+                    { n:'2', label:'Send for approval', desc:'One click generates a versioned review link.', state:'done' },
+                    { n:'3', label:'Client reviews', desc:'Opens the link, sees a platform-accurate preview.', state:'active' },
+                    { n:'4', label:'Approve or revise', desc:'Approves instantly — or leaves a note and a new version is created.', state:'idle' },
+                  ].map((s, i) => (
+                    <div className="flow-step" key={i}>
+                      <div className={`flow-n${s.state === 'done' ? ' done' : s.state === 'active' ? ' active' : ''}`}>
+                        {s.state === 'done'
+                          ? <svg viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" fill="none" style={{width:10,height:10}}><polyline points="20 6 9 17 4 12"/></svg>
+                          : s.n
+                        }
+                      </div>
+                      <div className="flow-step-text">
+                        <div className="flow-step-label">{s.label}</div>
+                        <div className="flow-step-desc">{s.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="flow-link">
+                    <svg viewBox="0 0 24 24" strokeWidth={1.8} stroke="#bbb" fill="none" style={{width:12,height:12,flexShrink:0}}>
+                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                    <span className="flow-link-url">tercero.co/review/xK92mP8nLq3v</span>
+                    <span className="flow-copy">Copy link</span>
+                  </div>
+
+                  <div style={{marginTop:20,paddingTop:20,borderTop:'1px solid #f5f5f5'}}>
+                    <div style={{fontSize:11,fontWeight:600,color:'#ccc',textTransform:'uppercase',letterSpacing:'.06em',marginBottom:12}}>Version history</div>
+                    {[
+                      { v:'v2', note:'Caption updated per feedback · Approved', current:true },
+                      { v:'v1', note:'Changes requested: "Make the CTA clearer"', current:false },
+                    ].map((v, i) => (
+                      <div key={i} style={{display:'flex',alignItems:'flex-start',gap:10,marginBottom:10}}>
+                        <div style={{width:6,height:6,borderRadius:'50%',background: v.current ? '#16a34a' : '#e5e5e5',flexShrink:0,marginTop:5}}/>
+                        <div>
+                          <div style={{fontSize:12,fontWeight:500,color:'#0a0a0a'}}>{v.v} {v.current && <span style={{fontSize:10,color:'#16a34a',marginLeft:4,fontWeight:600}}>CURRENT</span>}</div>
+                          <div style={{fontSize:11,color:'#bbb',marginTop:2}}>{v.note}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ── Features Grid ────────────────────────────────────────────────
+  function FeaturesGrid() {
+    const features = [
+      { Icon: 'Users',  name:'Client Management',  desc:'Every client in one profile — branding, billing, platforms, and pipeline.' },
+      { Icon: 'Check2', name:'Content Approvals',   desc:'Magic link reviews. No login for clients. Full version history.' },
+      { Icon: 'Cal',    name:'Content Calendar',    desc:'Visual calendar across all clients and platforms. Month and week views.' },
+      { Icon: 'Zap',    name:'Campaigns',           desc:'Group posts into campaigns with a single review link for the whole initiative.' },
+      { Icon: 'Target', name:'Prospects CRM',       desc:'Built-in lead pipeline from New to Won. One click converts to client.' },
+      { Icon: 'Send',   name:'Proposals',           desc:'Send proposals clients accept online. Track when they open it.' },
+      { Icon: 'Dollar', name:'Finance',             desc:'Invoice, track expenses, see profit per client — all in one workspace.' },
+      { Icon: 'File',   name:'Documents & Notes',   desc:'Centralised file storage per client, with meeting scheduling and tasks.' },
+    ];
+    const iconMap = {
+      Users: Ic.Users, Check2: Ic.Check2, Cal: Ic.Cal, Zap: Ic.Zap,
+      Target: Ic.Target, Send: Ic.Send, Dollar: Ic.Dollar, File: Ic.File,
+    };
+    return (
+      <section className="section" id="features">
+        <div className="divider"/>
+        <div className="wrap" style={{paddingTop:48}}>
+          <div className="reveal">
+            <span className="eyebrow">Everything included</span>
+            <h2>One platform.<br/><em>Every part of your agency.</em></h2>
+          </div>
+          <div className="feat-grid">
+            {features.map((f, i) => {
+              const Icon = iconMap[f.Icon];
+              return (
+                <div className={`feat-item reveal d${(i%4)+1}`} key={i}>
+                  <div className="feat-icon" style={{color:'#666'}}>
+                    <Icon/>
+                  </div>
+                  <div className="feat-name">{f.name}</div>
+                  <div className="feat-desc">{f.desc}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ── Finance Dive ─────────────────────────────────────────────────
+  function FinanceDive() {
+    return (
+      <section className="section">
+        <div className="divider"/>
+        <div className="wrap" style={{paddingTop:48}}>
+          <div className="split rev">
+            <div className="reveal">
+              <span className="eyebrow">Finance</span>
+              <h2>Invoice, track, and know<br/>your profit — <em>per client.</em></h2>
+              <p className="lead">Your finances live alongside your client work. Create an invoice, mark it paid, and the ledger updates itself.</p>
+              <ul className="check-list">
+                {[
+                  'Invoices with line items, auto-numbered per year',
+                  'Status flow: Draft → Sent → Overdue → Paid',
+                  'Mark as Paid → income entry created automatically',
+                  'Recurring templates for retainer clients',
+                  'Revenue vs. expenses chart, net profit at a glance',
+                ].map((t, i) => (
+                  <li key={i}>
+                    <svg viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" fill="none" style={{width:14,height:14,flexShrink:0,marginTop:3}}>
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="reveal d2">
+              <FinanceMockup/>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  function FinanceMockup() {
+    // SVG line chart path data — two lines (revenue green, expenses red)
+    // x: Apr=60, May=200, Jun=340 | y range: 0–80 (mapped from ₹0–₹4k)
+    const revPoints = "60,72 200,48 340,30";
+    const expPoints = "60,68 200,58 340,50";
+
+    const kpis = [
+      { label:'NET PROFIT (CASH)', val:'₹1.84L', sub:'0.0% margin', color:'#22c55e', icon:'M22 12h-4l-3 9L9 3l-3 9H2' },
+      { label:'CASH INFLOW (MO)', val:'₹2.4L', sub:'Received this month', color:'#888', icon:'M23 6l-9.5 9.5-5-5L1 18' },
+      { label:'EXPENSES (MO)', val:'₹56k', sub:'Subscriptions + One-offs', color:'#f87171', icon:'M23 18l-9.5-9.5-5 5L1 6' },
+      { label:'PENDING INVOICES', val:'₹48k', sub:'Unpaid invoices', color:'#f59e0b', icon:'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z', amber:true },
+    ];
+
+    return (
+      <div style={{display:'flex',flexDirection:'column',gap:10,fontFamily:'DM Sans,system-ui,sans-serif'}}>
+        {/* Header row */}
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:2}}>
+          <div style={{fontSize:16,fontWeight:700,color:'#0a0a0a',letterSpacing:'-.02em'}}>Performance Metrics</div>
+          <div style={{display:'flex',border:'1px solid #e5e5e5',borderRadius:8,overflow:'hidden'}}>
+            {['Cash','Accrual'].map((t,i) => (
+              <div key={i} style={{fontSize:11,fontWeight:500,padding:'5px 12px',background: i===0 ? '#f5f5f5' : '#fff',color: i===0 ? '#0a0a0a' : '#aaa',cursor:'pointer',borderRight: i===0 ? '1px solid #e5e5e5' : 'none'}}>{t}</div>
+            ))}
+          </div>
+        </div>
+
+        {/* KPI cards */}
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
+          {kpis.map((k,i) => (
+            <div key={i} style={{border:`1px solid ${k.amber ? '#fde68a' : '#f0f0f0'}`,borderRadius:10,padding:'14px 16px',background: k.amber ? '#fffbeb' : '#fff'}}>
+              <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:10}}>
+                <div style={{fontSize:9,fontWeight:700,color: k.amber ? '#d97706' : '#bbb',letterSpacing:'.07em',textTransform:'uppercase',lineHeight:1.4}}>{k.label}</div>
+                <div style={{width:22,height:22,borderRadius:6,background: k.amber ? '#fef3c7' : '#f8f8f8',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+                  <svg viewBox="0 0 24 24" strokeWidth={1.8} stroke={k.color} fill="none" style={{width:11,height:11}}><path d={k.icon}/></svg>
+                </div>
+              </div>
+              <div style={{fontSize:22,fontWeight:700,color: k.amber ? '#d97706' : (i===0 ? '#22c55e' : '#0a0a0a'),letterSpacing:'-.03em',lineHeight:1,marginBottom:4}}>{k.val}</div>
+              <div style={{fontSize:10,color: k.amber ? '#d97706' : '#bbb'}}>{k.sub}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Profitability Trend chart */}
+        <div style={{border:'1px solid #f0f0f0',borderRadius:12,padding:'16px',background:'#fff'}}>
+          <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:12}}>
+            <div>
+              <div style={{fontSize:13,fontWeight:600,color:'#0a0a0a'}}>Profitability Trend</div>
+              <div style={{fontSize:11,color:'#bbb',marginTop:2}}>Cash Collected vs Expenses (Last 3 Months)</div>
+            </div>
+            <div style={{display:'flex',gap:4}}>
+              {['3M','6M','12M'].map((t,i) => (
+                <div key={i} style={{fontSize:10,fontWeight:600,padding:'3px 8px',borderRadius:5,background: i===0 ? '#f0f0f0' : 'transparent',color: i===0 ? '#0a0a0a' : '#ccc',cursor:'pointer'}}>{t}</div>
+              ))}
+            </div>
+          </div>
+
+          <svg viewBox="0 0 400 90" style={{width:'100%',height:90,overflow:'visible'}}>
+            {/* Grid lines */}
+            {[0,25,50,75].map((y,i) => (
+              <g key={i}>
+                <line x1="40" y1={y+5} x2="390" y2={y+5} stroke="#f5f5f5" strokeWidth="1"/>
+                <text x="34" y={y+9} fontSize="7" fill="#ccc" textAnchor="end">₹{(3-i)*1}k</text>
+              </g>
+            ))}
+            {/* X labels */}
+            {[{x:105,l:'Apr'},{x:215,l:'May'},{x:325,l:'Jun'}].map((m,i) => (
+              <text key={i} x={m.x} y="88" fontSize="8" fill="#bbb" textAnchor="middle">{m.l}</text>
+            ))}
+            {/* Revenue area fill */}
+            <defs>
+              <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#22c55e" stopOpacity="0.12"/>
+                <stop offset="100%" stopColor="#22c55e" stopOpacity="0"/>
+              </linearGradient>
+              <linearGradient id="expGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#f87171" stopOpacity="0.1"/>
+                <stop offset="100%" stopColor="#f87171" stopOpacity="0"/>
+              </linearGradient>
+            </defs>
+            <polygon points={`60,72 200,42 340,22 340,80 60,80`} fill="url(#revGrad)"/>
+            <polygon points={`60,68 200,58 340,52 340,80 60,80`} fill="url(#expGrad)"/>
+            {/* Revenue line */}
+            <polyline points="60,72 200,42 340,22" fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            {/* Expense line */}
+            <polyline points="60,68 200,58 340,52" fill="none" stroke="#f87171" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            {/* Dots */}
+            {[[60,72],[200,42],[340,22]].map(([x,y],i) => <circle key={i} cx={x} cy={y} r="3" fill="#22c55e" stroke="#fff" strokeWidth="1.5"/>)}
+            {[[60,68],[200,58],[340,52]].map(([x,y],i) => <circle key={i} cx={x} cy={y} r="3" fill="#f87171" stroke="#fff" strokeWidth="1.5"/>)}
+          </svg>
+
+          {/* Legend */}
+          <div style={{display:'flex',gap:16,marginTop:4,justifyContent:'center'}}>
+            {[{c:'#22c55e',l:'Revenue'},{c:'#f87171',l:'Expenses'}].map((lg,i) => (
+              <div key={i} style={{display:'flex',alignItems:'center',gap:5,fontSize:10,color:'#888'}}>
+                <div style={{width:10,height:3,borderRadius:9999,background:lg.c}}/>
+                {lg.l}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Pricing ──────────────────────────────────────────────────────
+  function Pricing() {
+    const plans = [
+      {
+        tier:'Ignite', price:'₹1,999', per:'/month', clients:'Up to 5 clients',
+        feats:['Client management & profiles','Content approvals & versioning','Content calendar','Finance — invoices & ledger','Documents (20 GB)','Meetings & notes','Tercero branding on portals'],
+        cta:'Get started', btnClass:'plan-btn-outline', featured:false,
+      },
+      {
+        tier:'Velocity', price:'₹5,999', per:'/month', clients:'Up to 15 clients',
+        feats:['Everything in Ignite','Campaigns module','Prospects CRM','Proposals — unlimited','Recurring invoice templates','Expense subscriptions','Agency logo on portals','Storage: 50 GB'],
+        cta:'Get started', btnClass:'plan-btn-white', featured:true,
+      },
+      {
+        tier:'Quantum', price:'₹12,999', per:'/month', clients:'Up to 30 clients',
+        feats:['Everything in Velocity','Full white-label portals','No Tercero branding','Priority support','Storage: 100 GB'],
+        cta:'Contact us', btnClass:'plan-btn-outline', featured:false,
+      },
+    ];
+    return (
+      <section className="section" id="pricing">
+        <div className="divider"/>
+        <div className="wrap" style={{paddingTop:48}}>
+          <div className="reveal" style={{textAlign:'center',maxWidth:480,margin:'0 auto'}}>
+            <span className="eyebrow">Pricing</span>
+            <h2>Simple, honest pricing.</h2>
+            <p className="lead" style={{margin:'0 auto'}}>14-day free trial included. Upgrade when you're ready.</p>
+          </div>
+          <div className="price-grid">
+            {plans.map((p, i) => (
+              <div className={`price-card reveal d${i+1}${p.featured ? ' featured' : ''}`} key={i}>
+                {p.featured && <div className="feat-label">Most popular</div>}
+                <div className={`plan-tier${p.featured ? ' light' : ''}`}>{p.tier}</div>
+                <div className={`plan-price${p.featured ? ' light' : ''}`}>{p.price}</div>
+                <div className={`plan-per${p.featured ? ' light' : ''}`}>{p.per}</div>
+                <div className={`plan-clients${p.featured ? ' light' : ''}`}>{p.clients}</div>
+                <div className={`pdiv${p.featured ? ' light' : ''}`}/>
+                <ul className="plan-feats">
+                  {p.feats.map((f, j) => (
+                    <li className={p.featured ? 'light' : ''} key={j}>
+                      <svg viewBox="0 0 24 24" strokeWidth={2.5} fill="none" stroke="currentColor" style={{width:13,height:13,flexShrink:0,marginTop:2,stroke: p.featured ? 'rgba(255,255,255,0.4)' : '#bbb'}}>
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <button className={`plan-btn ${p.btnClass}`}>{p.cta}</button>
+              </div>
+            ))}
+          </div>
+          <p style={{textAlign:'center',fontSize:13,color:'#ccc',marginTop:20,fontWeight:300}}>Add-on clients · ₹500/mo per client on Ignite & Velocity · ₹450/mo on Quantum</p>
+        </div>
+      </section>
+    );
+  }
+
+  // ── Platforms ────────────────────────────────────────────────────
+  function Platforms() {
+    const plats = [
+      { name:'Instagram', color:'#E1306C' },
+      { name:'LinkedIn', color:'#0077B5' },
+      { name:'X / Twitter', color:'#000' },
+      { name:'YouTube', color:'#FF0000' },
+      { name:'Facebook', color:'#1877F2' },
+      { name:'Google Business', color:'#34A853' },
+    ];
+    return (
+      <div className="plat-section reveal">
+        <div className="wrap">
+          <p style={{textAlign:'center',fontSize:12,color:'#ccc',marginBottom:20,letterSpacing:'.06em',textTransform:'uppercase',fontWeight:500}}>
+            Platform-specific previews for
+          </p>
+          <div className="plat-row">
+            {plats.map((p, i) => (
+              <div className="plat-tag" key={i}>
+                <div className="plat-dot" style={{background:p.color}}/>
+                {p.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Final CTA ────────────────────────────────────────────────────
+  function FinalCTA() {
+    return (
+      <section className="final">
+        <div className="wrap">
+          <div className="reveal">
+            <span className="eyebrow" style={{display:'block',marginBottom:16}}>Start today</span>
+            <h2 style={{maxWidth:580,margin:'0 auto 16px'}}>
+              Run your agency.<br/><em>Not your inbox.</em>
+            </h2>
+            <p>14-day free trial. No credit card required.</p>
+            <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:12,flexWrap:'wrap'}}>
+              <button className="btn-primary" style={{fontSize:16,padding:'15px 30px'}}>
+                Start free trial
+                <svg viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" fill="none" style={{width:15,height:15}}>
+                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
+              <button className="btn-secondary" style={{fontSize:16,padding:'15px 30px'}}>See all features</button>
+            </div>
+            <p className="final-note">5 clients · 20 GB · All core features included in trial</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ── Footer ───────────────────────────────────────────────────────
+  function Footer() {
+    return (
+      <footer>
+        <div className="wrap">
+          <div className="foot-grid">
+            <div>
+              <LogoSVG/>
+              <p className="foot-brand-desc">The all-in-one operations platform for social media agencies. From lead to invoice.</p>
+            </div>
+            {[
+              { title:'Product', links:['Features','Pricing','Content Approvals','Prospects CRM','Finance'] },
+              { title:'Company', links:['About','Blog','Changelog','Contact'] },
+              { title:'Legal', links:['Privacy Policy','Terms of Service','Cookie Policy'] },
+            ].map((col, i) => (
+              <div key={i}>
+                <div className="foot-col-title">{col.title}</div>
+                <ul className="foot-links">
+                  {col.links.map(l => <li key={l}><a href="#">{l}</a></li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="foot-bottom">
+            <div className="foot-legal">© 2025 Tercero. All rights reserved.</div>
+            <div className="foot-legal">Built for agency operators.</div>
+          </div>
+        </div>
+      </footer>
+    );
+  }
+
+  // ── App ──────────────────────────────────────────────────────────
+  function App() {
+    useReveal();
+    return (
+      <>
+        <Navbar />
+        <Hero />
+        <Problem />
+        <ApprovalDive />
+        <FeaturesGrid />
+        <FinanceDive />
+        <Pricing />
+        <Platforms />
+        <FinalCTA />
+        <Footer />
+      </>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
