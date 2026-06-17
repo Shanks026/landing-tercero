@@ -81,14 +81,13 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="relative mt-9 max-sm:mt-7 border border-border rounded-2xl overflow-hidden shadow-[0_2px_40px_rgba(0,0,0,0.06),0_0_0_1px_rgba(0,0,0,0.02)]"
         >
-          <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-b from-transparent to-background pointer-events-none z-[2]" />
           <div className="bg-muted border-b border-border px-4 py-3 flex items-center gap-[6px]">
             <div className="w-[10px] h-[10px] rounded-full bg-[#ff5f57]" />
             <div className="w-[10px] h-[10px] rounded-full bg-[#ffbd2e]" />
             <div className="w-[10px] h-[10px] rounded-full bg-[#28c840]" />
             <div className="flex-1 mx-3 bg-border rounded-[5px] px-[10px] py-[5px] flex items-center">
               <span className="text-[11px] text-muted-foreground/50 font-mono">
-                app.tercero.co/dashboard
+                app.tercerospace.com/dashboard
               </span>
             </div>
           </div>
