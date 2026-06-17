@@ -1,13 +1,13 @@
-import { motion } from 'framer-motion'
-import dashboard from '../assets/dashboard.png'
-import { Button } from './ui/button'
-import { links } from '../lib/links'
+import { motion } from "framer-motion";
+import dashboard from "../assets/dashboard.png";
+import { Button } from "./ui/button";
+import { links } from "../lib/links";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] },
-})
+});
 
 export function Hero() {
   return (
@@ -23,26 +23,53 @@ export function Hero() {
 
           <motion.h1
             {...fadeUp(0.08)}
-            className="font-display text-[clamp(38px,5vw,68px)] font-extrabold leading-[1.06] tracking-[-0.03em] text-foreground mb-[18px]"
+            className="font-display text-[clamp(38px,5vw,68px)] font-bold leading-[1.06] tracking-[-0.03em] text-foreground mb-[18px]"
           >
-            Content, clients,<br />
-            invoices — <em className="not-italic text-muted-foreground/50">one place.</em>
+            Content, clients,
+            <br />
+            invoices —{" "}
+            <em className="not-italic text-muted-foreground/50">one place.</em>
           </motion.h1>
 
-          <motion.p {...fadeUp(0.16)} className="text-base text-muted-foreground leading-[1.7] max-w-[480px] font-normal mx-auto mb-7">
-            Tercero replaces the fragmented stack of Notion, spreadsheets, approval emails, and accounting tools. From lead to invoice, without switching tabs.
+          <motion.p
+            {...fadeUp(0.16)}
+            className="text-base text-muted-foreground leading-[1.7] max-w-[480px] font-normal mx-auto mb-7"
+          >
+            Tercero replaces the fragmented stack of Notion, spreadsheets,
+            approval emails, and accounting tools. From lead to invoice, without
+            switching tabs.
           </motion.p>
 
-          <motion.div {...fadeUp(0.24)} className="flex items-center justify-center gap-3 flex-wrap">
-            <Button asChild variant="default" size="lg" className="font-sans tracking-[-0.01em] text-[15px]">
+          <motion.div
+            {...fadeUp(0.24)}
+            className="flex items-center justify-center gap-3 flex-wrap"
+          >
+            <Button
+              asChild
+              variant="default"
+              size="lg"
+              className="font-sans tracking-[-0.01em] text-[15px]"
+            >
               <a href={links.signup}>
                 Start free trial
-                <svg viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" fill="none" style={{ width: 15, height: 15 }}>
-                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                <svg
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  fill="none"
+                  style={{ width: 15, height: 15 }}
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
                 </svg>
               </a>
             </Button>
-            <Button asChild variant="ghost" size="lg" className="font-sans text-[15px] text-muted-foreground hover:text-foreground">
+            <Button
+              asChild
+              variant="ghost"
+              size="lg"
+              className="font-sans text-[15px] text-muted-foreground hover:text-foreground"
+            >
               <a href="#how">See how it works</a>
             </Button>
           </motion.div>
@@ -60,12 +87,18 @@ export function Hero() {
             <div className="w-[10px] h-[10px] rounded-full bg-[#ffbd2e]" />
             <div className="w-[10px] h-[10px] rounded-full bg-[#28c840]" />
             <div className="flex-1 mx-3 bg-border rounded-[5px] px-[10px] py-[5px] flex items-center">
-              <span className="text-[11px] text-muted-foreground/50 font-mono">app.tercero.co/dashboard</span>
+              <span className="text-[11px] text-muted-foreground/50 font-mono">
+                app.tercero.co/dashboard
+              </span>
             </div>
           </div>
-          <img src={dashboard} alt="Tercero Dashboard" className="w-full block rounded-b-2xl" />
+          <img
+            src={dashboard}
+            alt="Tercero Dashboard"
+            className="w-full block rounded-b-2xl"
+          />
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

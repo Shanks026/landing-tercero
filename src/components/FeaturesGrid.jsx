@@ -1,16 +1,52 @@
-import { Reveal } from '../lib/Reveal'
+import { Reveal } from "../lib/Reveal";
 
 const features = [
-  { emoji: '🧑‍💼', name: 'Client Management',  desc: 'Every client in one profile — branding, billing, platforms, and pipeline.' },
-  { emoji: '✅',   name: 'Content Approvals',   desc: 'Magic link reviews. No login for clients. Full version history.' },
-  { emoji: '📅',   name: 'Content Calendar',    desc: 'Visual calendar across all clients and platforms. Month and week views.' },
-  { emoji: '📣',   name: 'Campaigns',           desc: 'Group posts into campaigns with a single review link for the whole initiative.' },
-  { emoji: '🎯',   name: 'Prospects CRM',       desc: 'Built-in lead pipeline from New to Won. One click converts to client.' },
-  { emoji: '📨',   name: 'Proposals',           desc: 'Send proposals clients accept online. Track when they open it.' },
-  { emoji: '💰',   name: 'Finance',             desc: 'Invoice, track expenses, see profit per client — all in one workspace.' },
-  { emoji: '📁',   name: 'Documents & Notes',   desc: 'Centralised file storage per client, with meeting scheduling and tasks.' },
-  { emoji: '👥',   name: 'Team Management',     desc: 'Invite teammates, assign roles, and manage access across every client account.' },
-]
+  {
+    emoji: "🧑‍💼",
+    name: "Client Management",
+    desc: "Every client in one profile — branding, billing, platforms, and pipeline.",
+  },
+  {
+    emoji: "✅",
+    name: "Content Approvals",
+    desc: "Magic link reviews. No login for clients. Full version history.",
+  },
+  {
+    emoji: "📅",
+    name: "Content Calendar",
+    desc: "Visual calendar across all clients and platforms. Month and week views.",
+  },
+  {
+    emoji: "📣",
+    name: "Campaigns",
+    desc: "Group posts into campaigns with a single review link for the whole initiative.",
+  },
+  {
+    emoji: "🎯",
+    name: "Prospects CRM",
+    desc: "Built-in lead pipeline from New to Won. One click converts to client.",
+  },
+  {
+    emoji: "📨",
+    name: "Proposals",
+    desc: "Send proposals clients accept online. Track when they open it.",
+  },
+  {
+    emoji: "💰",
+    name: "Finance",
+    desc: "Invoice, track expenses, see profit per client — all in one workspace.",
+  },
+  {
+    emoji: "📁",
+    name: "Documents & Notes",
+    desc: "Centralised file storage per client, with meeting scheduling and tasks.",
+  },
+  {
+    emoji: "👥",
+    name: "Team Management",
+    desc: "Invite teammates, assign roles, and manage access across every client account.",
+  },
+];
 
 export function FeaturesGrid() {
   return (
@@ -18,9 +54,15 @@ export function FeaturesGrid() {
       <div className="h-px bg-border" />
       <div className="max-w-wrap mx-auto px-10 max-sm:px-5 pt-12">
         <Reveal>
-          <span className="text-xs font-medium text-muted-foreground tracking-[0.06em] uppercase mb-4 block">Everything included</span>
-          <h2 className="font-['Bricolage_Grotesque'] text-[clamp(28px,3.5vw,46px)] font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground mb-3">
-            One platform.<br /><em className="not-italic text-muted-foreground/60">Every part of your agency.</em>
+          <span className="text-xs font-medium text-muted-foreground tracking-[0.06em] uppercase mb-4 block">
+            Everything included
+          </span>
+          <h2 className="font-['Bricolage_Grotesque'] text-[clamp(28px,3.5vw,46px)] font-bold leading-[1.1] tracking-[-0.03em] text-foreground mb-3">
+            One platform.
+            <br />
+            <em className="not-italic text-muted-foreground/60">
+              Every part of your agency.
+            </em>
           </h2>
         </Reveal>
 
@@ -30,16 +72,20 @@ export function FeaturesGrid() {
               key={i}
               delay={(i % 3) * 0.08}
               className={`p-8 border-border border-b hover:bg-muted transition-colors ${
-                (i + 1) % 3 !== 0 ? 'border-r' : ''
+                (i + 1) % 3 !== 0 ? "border-r" : ""
               }`}
             >
               <div className="text-2xl mb-[14px]">{f.emoji}</div>
-              <div className="font-['Bricolage_Grotesque'] text-sm font-bold text-foreground mb-[6px] tracking-[-0.01em]">{f.name}</div>
-              <div className="text-[13px] text-muted-foreground leading-[1.55] font-normal">{f.desc}</div>
+              <div className="font-['Bricolage_Grotesque'] text-sm font-bold text-foreground mb-[6px] tracking-[-0.01em]">
+                {f.name}
+              </div>
+              <div className="text-[13px] text-muted-foreground leading-[1.55] font-normal">
+                {f.desc}
+              </div>
             </Reveal>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
