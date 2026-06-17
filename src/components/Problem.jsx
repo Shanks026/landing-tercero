@@ -28,7 +28,7 @@ export function Problem() {
                 i < 2 ? 'border-r border-border max-md:border-r-0 max-md:border-b' : ''
               }`}
             >
-              <div className="font-serif text-[42px] text-muted-foreground/40 leading-none mb-[14px] font-normal">{item.n}</div>
+              <div className="font-display text-[42px] text-muted-foreground/40 leading-none mb-[14px] font-regular">{item.n}</div>
               <div className="font-['Bricolage_Grotesque'] text-[15px] font-bold text-foreground mb-2 tracking-[-0.01em]">{item.title}</div>
               <div className="text-sm text-muted-foreground leading-[1.6] font-normal">{item.desc}</div>
             </div>
