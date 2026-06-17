@@ -6,7 +6,7 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/:path((?!$).*)",
+      "source": "/:path((?!assets)(?!$).*)",
       "destination": "https://app.tercerospace.com/:path",
       "permanent": false
     }
