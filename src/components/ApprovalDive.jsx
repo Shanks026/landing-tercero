@@ -37,7 +37,7 @@ const checks = [
 
 export function ApprovalDive() {
   return (
-    <section className="py-[60px]" id="how">
+    <section className="py-[60px] max-sm:py-10" id="how">
       <div className="h-px bg-border" />
       <div className="max-w-wrap mx-auto px-10 max-sm:px-5 pt-12">
         <div className="grid grid-cols-2 max-md:grid-cols-1 gap-24 max-md:gap-10 items-start">
@@ -145,7 +145,7 @@ export function ApprovalDive() {
                     <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                     <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                   </svg>
-                  <span className="text-[11px] text-muted-foreground/60 font-mono flex-1">
+                  <span className="text-[11px] text-muted-foreground/60 font-mono flex-1 truncate min-w-0">
                     tercero.co/review/xK92mP8nLq3v
                   </span>
                   <span className="text-[11px] font-medium text-foreground cursor-pointer whitespace-nowrap">

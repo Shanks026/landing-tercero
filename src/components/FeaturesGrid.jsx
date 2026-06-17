@@ -50,7 +50,7 @@ const features = [
 
 export function FeaturesGrid() {
   return (
-    <section className="py-[60px]" id="features">
+    <section className="py-[60px] max-sm:py-10" id="features">
       <div className="h-px bg-border" />
       <div className="max-w-wrap mx-auto px-10 max-sm:px-5 pt-12">
         <Reveal>
@@ -66,14 +66,12 @@ export function FeaturesGrid() {
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 border-t border-border">
+        <div className="mt-14 grid grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 border-t border-l border-border">
           {features.map((f, i) => (
             <Reveal
               key={i}
               delay={(i % 3) * 0.08}
-              className={`p-8 border-border border-b hover:bg-muted transition-colors ${
-                (i + 1) % 3 !== 0 ? "border-r" : ""
-              }`}
+              className="p-8 max-sm:p-6 border-r border-b border-border hover:bg-muted transition-colors"
             >
               <div className="text-2xl mb-[14px]">{f.emoji}</div>
               <div className="font-['Bricolage_Grotesque'] text-sm font-bold text-foreground mb-[6px] tracking-[-0.01em]">

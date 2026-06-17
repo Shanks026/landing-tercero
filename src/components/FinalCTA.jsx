@@ -4,7 +4,7 @@ import { links } from "../lib/links";
 
 export function FinalCTA() {
   return (
-    <section className="py-20 text-center bg-foreground/[0.04]">
+    <section className="py-20 max-sm:py-14 text-center bg-foreground/[0.04]">
       <div className="max-w-wrap mx-auto px-10 max-sm:px-5">
         <Reveal>
           <span className="text-xs font-medium text-muted-foreground tracking-[0.06em] uppercase mb-4 block">
@@ -20,7 +20,7 @@ export function FinalCTA() {
           <p className="text-muted-foreground text-base mb-9 font-normal">
             14-day free trial with full Quantum access. No credit card required.
           </p>
-          <div className="flex items-center justify-center gap-3 flex-wrap">
+          <div className="flex items-center justify-center gap-3 flex-wrap max-sm:flex-col max-sm:items-stretch max-sm:max-w-[320px] max-sm:mx-auto">
             <Button
               asChild
               variant="default"

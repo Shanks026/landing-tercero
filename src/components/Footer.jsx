@@ -30,7 +30,7 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <div className="border-t border-border pt-6 flex items-center justify-between">
+        <div className="border-t border-border pt-6 flex items-center justify-between max-sm:flex-col max-sm:items-start max-sm:gap-1">
           <div className="text-xs text-muted-foreground/30">© 2025 Tercero. All rights reserved.</div>
           <div className="text-xs text-muted-foreground/30">Built for agency operators.</div>
         </div>

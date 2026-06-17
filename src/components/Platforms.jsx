@@ -17,7 +17,7 @@ const plats = [
 
 export function Platforms() {
   return (
-    <Reveal className="py-16 border-t border-border">
+    <Reveal className="py-16 max-sm:py-10 border-t border-border">
       <div className="max-w-wrap mx-auto px-10 max-sm:px-5">
         <p className="text-center text-xs text-muted-foreground mb-5 tracking-[0.06em] uppercase font-medium">
           Platform-specific previews for

@@ -20,7 +20,7 @@ const items = [
 
 export function Problem() {
   return (
-    <section className="py-[60px] pt-[60px]">
+    <section className="py-[60px] max-sm:py-10">
       <div className="max-w-wrap mx-auto px-10 max-sm:px-5">
         <Reveal className="max-w-[520px]">
           <span className="text-xs font-medium text-muted-foreground tracking-[0.06em] uppercase mb-4 block">

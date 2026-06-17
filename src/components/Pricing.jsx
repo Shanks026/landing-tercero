@@ -71,7 +71,7 @@ const plans = [
 
 export function Pricing() {
   return (
-    <section className="py-[60px]" id="pricing">
+    <section className="py-[60px] max-sm:py-10" id="pricing">
       <div className="h-px bg-border" />
       <div className="max-w-wrap mx-auto px-10 max-sm:px-5 pt-12">
         <Reveal className="text-center max-w-[480px] mx-auto mb-3">
@@ -95,7 +95,7 @@ export function Pricing() {
               <motion.div
                 whileHover={{ y: -3 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className={`relative flex flex-col h-full rounded-2xl p-8 border ${
+                className={`relative flex flex-col h-full rounded-2xl p-8 max-sm:p-6 border ${
                   p.featured
                     ? "bg-foreground border-foreground/20"
                     : "bg-background border-border hover:border-foreground/15"

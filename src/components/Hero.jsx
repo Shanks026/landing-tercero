@@ -11,7 +11,7 @@ const fadeUp = (delay = 0) => ({
 
 export function Hero() {
   return (
-    <section className="pt-[100px] pb-0">
+    <section className="pt-[100px] max-sm:pt-[76px] pb-0">
       <div className="max-w-wrap mx-auto px-10 max-sm:px-5">
         <div className="text-center max-w-[660px] mx-auto">
           <motion.div {...fadeUp(0)}>
@@ -27,7 +27,7 @@ export function Hero() {
           >
             Content, clients,
             <br />
-            invoices —{" "}
+            invoices -{" "}
             <em className="not-italic text-muted-foreground/50">one place.</em>
           </motion.h1>
 
@@ -42,7 +42,7 @@ export function Hero() {
 
           <motion.div
             {...fadeUp(0.24)}
-            className="flex items-center justify-center gap-3 flex-wrap"
+            className="flex items-center justify-center gap-3 flex-wrap max-sm:flex-col max-sm:items-stretch max-sm:w-full max-sm:max-w-[320px] max-sm:mx-auto"
           >
             <Button
               asChild
@@ -79,7 +79,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mt-9 border border-border rounded-2xl overflow-hidden shadow-[0_2px_40px_rgba(0,0,0,0.06),0_0_0_1px_rgba(0,0,0,0.02)]"
+          className="relative mt-9 max-sm:mt-7 border border-border rounded-2xl overflow-hidden shadow-[0_2px_40px_rgba(0,0,0,0.06),0_0_0_1px_rgba(0,0,0,0.02)]"
         >
           <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-b from-transparent to-background pointer-events-none z-[2]" />
           <div className="bg-muted border-b border-border px-4 py-3 flex items-center gap-[6px]">

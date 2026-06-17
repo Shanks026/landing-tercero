@@ -250,7 +250,7 @@ function FinanceMockup() {
 
 export function FinanceDive() {
   return (
-    <section className="py-[60px]">
+    <section className="py-[60px] max-sm:py-10">
       <div className="h-px bg-border" />
       <div className="max-w-wrap mx-auto px-10 max-sm:px-5 pt-12">
         <div
