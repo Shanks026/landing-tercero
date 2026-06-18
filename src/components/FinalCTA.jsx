@@ -1,4 +1,5 @@
 import { Reveal } from "../lib/Reveal";
+import { track } from "@vercel/analytics";
 import { Button } from "./ui/button";
 import { links } from "../lib/links";
 
@@ -26,7 +27,7 @@ export function FinalCTA() {
               variant="default"
               className="text-base px-5 h-auto py-[9px] font-sans tracking-[-0.01em]"
             >
-              <a href={links.signup}>
+              <a href={links.signup} onClick={() => track('signup_click', { location: 'cta' })}>
                 Start free trial
                 <svg
                   viewBox="0 0 24 24"

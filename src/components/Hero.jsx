@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { track } from "@vercel/analytics";
 import dashboard from "../assets/dashboard.png";
 import { Button } from "./ui/button";
 import { links } from "../lib/links";
@@ -50,7 +51,7 @@ export function Hero() {
               size="lg"
               className="font-sans tracking-[-0.01em] text-[15px]"
             >
-              <a href={links.signup}>
+              <a href={links.signup} onClick={() => track('signup_click', { location: 'hero' })}>
                 Start free trial
                 <svg
                   viewBox="0 0 24 24"

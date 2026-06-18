@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { track } from '@vercel/analytics'
 import { Logo } from '../lib/Logo'
 import { links } from '../lib/links'
 
@@ -40,7 +41,7 @@ export function Navbar() {
                 <a href={links.login} className="bg-transparent border-none text-muted-foreground text-sm font-normal cursor-pointer px-[14px] py-2 rounded-lg hover:text-foreground transition-colors font-sans no-underline">
                   Log in
                 </a>
-                <a href={links.signup} className="bg-primary text-primary-foreground border-none px-[18px] py-[9px] rounded-lg text-[13px] font-medium cursor-pointer hover:opacity-80 transition-opacity font-sans tracking-[-0.01em] no-underline">
+                <a href={links.signup} onClick={() => track('signup_click', { location: 'navbar' })} className="bg-primary text-primary-foreground border-none px-[18px] py-[9px] rounded-lg text-[13px] font-medium cursor-pointer hover:opacity-80 transition-opacity font-sans tracking-[-0.01em] no-underline">
                   Start free trial
                 </a>
               </div>
@@ -104,7 +105,7 @@ export function Navbar() {
               <div className="h-px bg-border my-4" />
               <ul className="list-none flex flex-col gap-1">
                 <li><a href={links.login} className="block text-base font-medium text-foreground no-underline px-2 py-[10px] rounded-lg hover:bg-muted transition-colors">Log in</a></li>
-                <li><a href={links.signup} className="block text-base font-semibold text-primary no-underline px-2 py-[10px] rounded-lg hover:bg-muted transition-colors">Start free trial</a></li>
+                <li><a href={links.signup} onClick={() => track('signup_click', { location: 'navbar_mobile' })} className="block text-base font-semibold text-primary no-underline px-2 py-[10px] rounded-lg hover:bg-muted transition-colors">Start free trial</a></li>
               </ul>
             </motion.div>
           </>

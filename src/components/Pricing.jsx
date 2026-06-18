@@ -1,5 +1,6 @@
 import { Reveal } from "../lib/Reveal";
 import { motion } from "framer-motion";
+import { track } from "@vercel/analytics";
 import { Zap, Rocket, Atom } from "lucide-react";
 import { links } from "../lib/links";
 
@@ -143,6 +144,10 @@ export function Pricing() {
                 {/* CTA above features */}
                 <a
                   href={p.cta === "Contact Team" ? links.contact : links.signup}
+                  onClick={() => p.cta === "Contact Team"
+                    ? track('contact_click', { plan: p.tier.toLowerCase() })
+                    : track('signup_click', { location: 'pricing', plan: p.tier.toLowerCase() })
+                  }
                   className={`w-full py-[11px] rounded-[10px] text-sm font-semibold cursor-pointer font-sans tracking-[-0.01em] transition-all inline-flex items-center justify-center gap-2 mb-6 no-underline ${
                     p.featured
                       ? "bg-background text-foreground hover:bg-background/90"
