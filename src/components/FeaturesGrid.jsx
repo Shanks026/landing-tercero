@@ -12,6 +12,11 @@ const features = [
     desc: "Magic link reviews. No login for clients. Full version history.",
   },
   {
+    emoji: "🛡️",
+    name: "Internal Approvals",
+    desc: "Route drafts through your team for sign-off before a client ever sees them.",
+  },
+  {
     emoji: "📅",
     name: "Content Calendar",
     desc: "Visual calendar across all clients and platforms. Month and week views.",
@@ -20,6 +25,11 @@ const features = [
     emoji: "📣",
     name: "Campaigns",
     desc: "Group posts into campaigns with a single review link for the whole initiative.",
+  },
+  {
+    emoji: "🗂️",
+    name: "Tasks & Assignments",
+    desc: "Assign tasks by role, and track status and due dates across every client.",
   },
   {
     emoji: "🎯",
@@ -38,13 +48,18 @@ const features = [
   },
   {
     emoji: "📁",
-    name: "Documents & Notes",
-    desc: "Centralised file storage per client, with meeting scheduling and tasks.",
+    name: "Documents",
+    desc: "Centralised file storage per client, with meeting scheduling built in.",
+  },
+  {
+    emoji: "📝",
+    name: "Notes",
+    desc: "Notion-style notes for every client — keep them private or share with the team.",
   },
   {
     emoji: "👥",
-    name: "Team Management",
-    desc: "Invite teammates, assign roles, and manage access across every client account.",
+    name: "Team & Permissions",
+    desc: "Invite teammates, assign roles, and control exactly what each one can see.",
   },
 ];
 

@@ -5,6 +5,7 @@ import { Problem } from './components/Problem'
 import { ApprovalDive } from './components/ApprovalDive'
 import { FeaturesGrid } from './components/FeaturesGrid'
 import { FinanceDive } from './components/FinanceDive'
+import { TeamDive } from './components/TeamDive'
 import { Pricing } from './components/Pricing'
 import { Platforms } from './components/Platforms'
 import { FinalCTA } from './components/FinalCTA'
@@ -19,6 +20,7 @@ export default function App() {
       <ApprovalDive />
       <FeaturesGrid />
       <FinanceDive />
+      <TeamDive />
       <Pricing />
       <Platforms />
       <FinalCTA />

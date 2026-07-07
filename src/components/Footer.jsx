@@ -1,7 +1,7 @@
 import { Logo } from '../lib/Logo'
 
 const cols = [
-  { title: 'Product', links: ['Features', 'Pricing', 'Content Approvals', 'Prospects CRM', 'Finance'] },
+  { title: 'Product', links: ['Features', 'Pricing', 'Content Approvals', 'Team & Permissions', 'Finance'] },
   { title: 'Company', links: ['About', 'Blog', 'Changelog', 'Contact'] },
   { title: 'Legal', links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy'] },
 ]
