@@ -16,7 +16,7 @@ export function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-[100] py-[22px] transition-all duration-400 border-b ${
+      <nav className={`fixed top-0 left-0 right-0 z-[100] py-[22px] transition-all duration-400 ${
         scrolled ? 'bg-background/92 backdrop-blur-[12px] border-border' : 'border-transparent'
       }`}>
         <div className="max-w-wrap mx-auto px-10 max-sm:px-5">

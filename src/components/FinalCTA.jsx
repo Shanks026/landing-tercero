@@ -12,10 +12,10 @@ export function FinalCTA() {
             Start today
           </span>
           <h2 className="font-display text-[clamp(28px,3.5vw,46px)] font-bold leading-[1.1] tracking-[-0.03em] text-foreground max-w-[580px] mx-auto mb-4">
-            Run your agency.
+            The last tool
             <br />
             <em className="not-italic text-muted-foreground/60">
-              Not your inbox.
+              your agency needs.
             </em>
           </h2>
           <p className="text-muted-foreground text-base mb-9 font-normal">

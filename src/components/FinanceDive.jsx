@@ -253,11 +253,8 @@ export function FinanceDive() {
     <section className="py-[60px] max-sm:py-10">
       <div className="h-px bg-border" />
       <div className="max-w-wrap mx-auto px-10 max-sm:px-5 pt-12">
-        <div
-          className="grid grid-cols-2 max-md:grid-cols-1 gap-24 max-md:gap-10 items-start"
-          style={{ direction: "rtl" }}
-        >
-          <Reveal style={{ direction: "ltr" }}>
+        <div className="grid grid-cols-2 max-md:grid-cols-1 gap-24 max-md:gap-10 items-start">
+          <Reveal>
             <span className="text-xs font-medium text-muted-foreground tracking-[0.06em] uppercase mb-4 block">
               Finance
             </span>
@@ -299,7 +296,7 @@ export function FinanceDive() {
             </ul>
           </Reveal>
 
-          <Reveal delay={0.16} style={{ direction: "ltr" }}>
+          <Reveal delay={0.16}>
             <FinanceMockup />
           </Reveal>
         </div>

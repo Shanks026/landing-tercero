@@ -17,10 +17,10 @@ export default function App() {
       <Navbar />
       <Hero />
       <Problem />
-      <ApprovalDive />
       <FeaturesGrid />
-      <FinanceDive />
+      <ApprovalDive />
       <TeamDive />
+      <FinanceDive />
       <Pricing />
       <Platforms />
       <FinalCTA />

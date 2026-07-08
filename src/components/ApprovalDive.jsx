@@ -1,31 +1,6 @@
+import { useState } from "react";
 import { Reveal } from "../lib/Reveal";
-
-const steps = [
-  {
-    n: "1",
-    label: "Draft post",
-    desc: "Write caption, select platform, attach media.",
-    state: "done",
-  },
-  {
-    n: "2",
-    label: "Send for approval",
-    desc: "One click generates a versioned review link.",
-    state: "done",
-  },
-  {
-    n: "3",
-    label: "Client reviews",
-    desc: "Opens the link, sees a platform-accurate preview.",
-    state: "active",
-  },
-  {
-    n: "4",
-    label: "Approve or revise",
-    desc: "Approves instantly — or leaves a note and a new version is created.",
-    state: "idle",
-  },
-];
+import { Badge } from "./ui/badge";
 
 const checks = [
   "Platform previews: Instagram, LinkedIn, X, YouTube",
@@ -33,9 +8,160 @@ const checks = [
   "Client feedback captured inline — no email thread needed",
   "You see approval or revision request in real time",
   "Full version history: who approved what, and when",
+  "Optional internal approval — owner or admin signs off before a client sees it",
 ];
 
+// Colors/labels mirror the app's POST_STATUS_CONFIG (src/lib/post-statuses.js).
+const STATUS = {
+  DRAFT: { label: "Draft", dot: "#3b82f6", className: "bg-blue-100 text-blue-700" },
+  SUBMITTED: { label: "Submitted", dot: "#f59e0b", className: "bg-amber-100 text-amber-700" },
+  CHANGES_REQUESTED: { label: "Changes Requested", dot: "#f43f5e", className: "bg-rose-100 text-rose-700" },
+  NEEDS_REVISION: { label: "Needs Revision", dot: "#ec4899", className: "bg-pink-100 text-pink-700" },
+  READY: { label: "Ready", dot: "#8b5cf6", className: "bg-violet-100 text-violet-700" },
+  PENDING_APPROVAL: { label: "Awaiting Approval", dot: "#f97316", className: "bg-orange-100 text-orange-700" },
+  APPROVED: { label: "Approved", dot: "#22c55e", className: "bg-green-100 text-green-700" },
+  SCHEDULED: { label: "Scheduled", dot: "#a855f7", className: "bg-purple-100 text-purple-700" },
+  PUBLISHED: { label: "Published", dot: "#10b981", className: "bg-emerald-100 text-emerald-700" },
+  DELIVERED: { label: "Delivered", dot: "#14b8a6", className: "bg-teal-100 text-teal-700" },
+};
+
+const clientFlow = [
+  { key: "DRAFT", note: "Post created — caption, platform, media." },
+  {
+    key: "PENDING_APPROVAL",
+    note: "A versioned magic link is sent to the client.",
+    branch: {
+      key: "NEEDS_REVISION",
+      note: "Client leaves a note → a new version is created.",
+    },
+  },
+  {
+    key: "APPROVED",
+    note: "Client approves. From here it either goes live or is handed off:",
+    fork: [
+      { caption: "Scheduled to social", pills: ["SCHEDULED", "PUBLISHED"] },
+      { caption: "Delivered to the client only", pills: ["DELIVERED"] },
+    ],
+  },
+];
+
+const internalFlow = [
+  { key: "DRAFT", note: "A member creates the post." },
+  {
+    key: "SUBMITTED",
+    note: "Sent to the owner / admin review queue.",
+    branch: {
+      key: "CHANGES_REQUESTED",
+      note: "Sent back to the creator to revise & resubmit.",
+    },
+  },
+  {
+    key: "READY",
+    note: "Approved internally — cleared to send to the client.",
+  },
+];
+
+function StatusBadge({ status }) {
+  const st = STATUS[status];
+  return (
+    <Badge variant="secondary" className={`gap-1.5 ${st.className}`}>
+      <span className="w-1.5 h-1.5 rounded-full bg-current shrink-0" />
+      {st.label}
+    </Badge>
+  );
+}
+
+function StatusFlow({ flow }) {
+  return (
+    <div>
+      {flow.map((node, i) => {
+        const last = i === flow.length - 1;
+        return (
+          <div key={i} className="flex gap-[14px]">
+            {/* Rail */}
+            <div className="flex flex-col items-center pt-[6px]">
+              <span
+                className="w-[11px] h-[11px] rounded-full shrink-0"
+                style={{ background: STATUS[node.key].dot }}
+              />
+              {!last && <span className="w-px flex-1 bg-border my-1" />}
+            </div>
+
+            {/* Content */}
+            <div className={last ? "" : "pb-5 flex-1"}>
+              <StatusBadge status={node.key} />
+              <div className="text-xs text-muted-foreground mt-[6px] leading-[1.5]">
+                {node.note}
+              </div>
+
+              {node.branch && (
+                <div className="mt-3 ml-1 pl-4 border-l border-dashed border-border">
+                  <StatusBadge status={node.branch.key} />
+                  <div className="text-xs text-muted-foreground mt-[6px] leading-[1.5]">
+                    {node.branch.note}
+                  </div>
+                  <div className="flex items-center gap-[6px] text-[11px] font-medium text-muted-foreground mt-2">
+                    <svg
+                      viewBox="0 0 24 24"
+                      strokeWidth={2}
+                      stroke="currentColor"
+                      fill="none"
+                      style={{ width: 12, height: 12 }}
+                    >
+                      <polyline points="1 4 1 10 7 10" />
+                      <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+                    </svg>
+                    loops back to revise
+                  </div>
+                </div>
+              )}
+
+              {node.fork && (
+                <div className="mt-3 flex flex-col gap-3">
+                  {node.fork.map((f, fi) => (
+                    <div
+                      key={fi}
+                      className="pl-4 border-l border-dashed border-border"
+                    >
+                      <div className="flex items-center gap-[6px] flex-wrap">
+                        {f.pills.map((p, pi) => (
+                          <span key={pi} className="flex items-center gap-[6px]">
+                            {pi > 0 && (
+                              <svg
+                                viewBox="0 0 24 24"
+                                strokeWidth={2}
+                                stroke="currentColor"
+                                fill="none"
+                                className="text-muted-foreground shrink-0"
+                                style={{ width: 12, height: 12 }}
+                              >
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="12 5 19 12 12 19" />
+                              </svg>
+                            )}
+                            <StatusBadge status={p} />
+                          </span>
+                        ))}
+                      </div>
+                      <div className="text-[11px] text-muted-foreground mt-[6px]">
+                        {f.caption}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function ApprovalDive() {
+  const [tab, setTab] = useState("client");
+  const flow = tab === "client" ? clientFlow : internalFlow;
+
   return (
     <section className="py-[60px] max-sm:py-10" id="how">
       <div className="h-px bg-border" />
@@ -48,7 +174,7 @@ export function ApprovalDive() {
             <h2 className="font-display text-[clamp(28px,3.5vw,46px)] font-bold leading-[1.1] tracking-[-0.03em] text-foreground mb-3">
               Clients approve
               <br />
-              <em className="not-italic text-muted-foreground/60">
+              <em className="not-italic text-muted-foreground">
                 without an account.
               </em>
             </h2>
@@ -85,113 +211,34 @@ export function ApprovalDive() {
 
           <Reveal delay={0.16}>
             <div className="border border-border rounded-2xl overflow-hidden shadow-[0_1px_20px_rgba(0,0,0,0.04)]">
-              <div className="px-6 py-5 border-b border-border">
+              <div className="px-5 py-4 border-b border-border flex items-center justify-between gap-4">
                 <div className="text-[13px] font-medium text-foreground tracking-[-0.01em]">
-                  Content approval flow
+                  {tab === "client"
+                    ? "Content approval flow"
+                    : "Internal approval flow"}
                 </div>
-                <div className="text-xs text-muted-foreground/50 mt-0.5">
-                  Bloom Studio · Instagram post · v2
-                </div>
-              </div>
-              <div className="px-6 py-5">
-                {steps.map((s, i) => (
-                  <div
-                    key={i}
-                    className={`flex items-start gap-[14px] py-[14px] ${i < steps.length - 1 ? "border-b border-border" : "pb-0"}`}
-                  >
-                    <div
-                      className={`w-[22px] h-[22px] rounded-full flex items-center justify-center shrink-0 mt-[1px] text-[11px] font-semibold ${
-                        s.state === "done"
-                          ? "bg-green-50 text-green-700"
-                          : s.state === "active"
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-muted text-muted-foreground/50"
+                <div className="inline-flex bg-muted rounded-lg p-[3px] shrink-0">
+                  {[
+                    { key: "client", label: "Client" },
+                    { key: "internal", label: "Internal" },
+                  ].map((t) => (
+                    <button
+                      key={t.key}
+                      type="button"
+                      onClick={() => setTab(t.key)}
+                      className={`text-[12px] font-medium px-3 py-[5px] rounded-[7px] transition-colors ${
+                        tab === t.key
+                          ? "bg-background text-foreground shadow-sm"
+                          : "text-muted-foreground hover:text-foreground"
                       }`}
                     >
-                      {s.state === "done" ? (
-                        <svg
-                          viewBox="0 0 24 24"
-                          strokeWidth={2.5}
-                          stroke="currentColor"
-                          fill="none"
-                          style={{ width: 10, height: 10 }}
-                        >
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                      ) : (
-                        s.n
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <div className="text-[13px] font-medium text-foreground">
-                        {s.label}
-                      </div>
-                      <div className="text-xs text-muted-foreground/50 mt-0.5 leading-[1.5]">
-                        {s.desc}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-
-                <div className="flex items-center gap-2 bg-muted border border-border rounded-lg px-[14px] py-[10px] mt-4">
-                  <svg
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.8}
-                    stroke="currentColor"
-                    fill="none"
-                    className="text-muted-foreground/50"
-                    style={{ width: 12, height: 12, flexShrink: 0 }}
-                  >
-                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                  </svg>
-                  <span className="text-[11px] text-muted-foreground/60 font-mono flex-1 truncate min-w-0">
-                    tercero.co/review/xK92mP8nLq3v
-                  </span>
-                  <span className="text-[11px] font-medium text-foreground cursor-pointer whitespace-nowrap">
-                    Copy link
-                  </span>
-                </div>
-
-                <div className="mt-5 pt-5 border-t border-border">
-                  <div className="text-[11px] font-semibold text-muted-foreground/40 uppercase tracking-[0.06em] mb-3">
-                    Version history
-                  </div>
-                  {[
-                    {
-                      v: "v2",
-                      note: "Caption updated per feedback · Approved",
-                      current: true,
-                    },
-                    {
-                      v: "v1",
-                      note: 'Changes requested: "Make the CTA clearer"',
-                      current: false,
-                    },
-                  ].map((v, i) => (
-                    <div
-                      key={i}
-                      className="flex items-start gap-[10px] mb-[10px]"
-                    >
-                      <div
-                        className={`w-[6px] h-[6px] rounded-full shrink-0 mt-[5px] ${v.current ? "bg-green-600" : "bg-border"}`}
-                      />
-                      <div>
-                        <div className="text-xs font-medium text-foreground">
-                          {v.v}
-                          {v.current && (
-                            <span className="text-[10px] text-green-700 ml-1 font-semibold">
-                              CURRENT
-                            </span>
-                          )}
-                        </div>
-                        <div className="text-[11px] text-muted-foreground/50 mt-0.5">
-                          {v.note}
-                        </div>
-                      </div>
-                    </div>
+                      {t.label}
+                    </button>
                   ))}
                 </div>
+              </div>
+              <div className="px-6 py-6">
+                <StatusFlow flow={flow} />
               </div>
             </div>
           </Reveal>

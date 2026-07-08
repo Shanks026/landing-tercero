@@ -26,20 +26,21 @@ export function Hero() {
             {...fadeUp(0.08)}
             className="font-display text-[clamp(38px,5vw,68px)] font-bold leading-[1.06] tracking-[-0.03em] text-foreground mb-[18px]"
           >
-            Content, clients,
+            Run your agency,
             <br />
-            team -{" "}
-            <em className="not-italic text-muted-foreground/50">one place.</em>
+            <em className="not-italic text-muted-foreground/50">
+              not your tabs.
+            </em>
           </motion.h1>
 
           <motion.p
             {...fadeUp(0.16)}
-            className="text-base text-muted-foreground leading-[1.7] max-w-[480px] font-normal mx-auto mb-7"
+            className="text-base text-muted-foreground leading-[1.7] max-w-3xl font-normal mx-auto mb-7"
           >
             Tercero replaces the fragmented stack of Notion, spreadsheets,
-            approval emails, and accounting tools. Assign work by role,
-            collaborate before clients see a thing, and invoice — without
-            switching tabs.
+            approval emails, and accounting tools. Assign work by role, get
+            internal sign-off before clients see a thing, and invoice — all in
+            one workspace.
           </motion.p>
 
           <motion.div
@@ -83,20 +84,10 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="relative mt-9 max-sm:mt-7 border border-border rounded-2xl overflow-hidden shadow-[0_2px_40px_rgba(0,0,0,0.06),0_0_0_1px_rgba(0,0,0,0.02)]"
         >
-          <div className="bg-muted border-b border-border px-4 py-3 flex items-center gap-[6px]">
-            <div className="w-[10px] h-[10px] rounded-full bg-[#ff5f57]" />
-            <div className="w-[10px] h-[10px] rounded-full bg-[#ffbd2e]" />
-            <div className="w-[10px] h-[10px] rounded-full bg-[#28c840]" />
-            <div className="flex-1 mx-3 bg-border rounded-[5px] px-[10px] py-[5px] flex items-center">
-              <span className="text-[11px] text-muted-foreground/50 font-mono">
-                app.tercerospace.com/dashboard
-              </span>
-            </div>
-          </div>
           <img
             src={dashboard}
             alt="Tercero Dashboard"
-            className="w-full block rounded-b-2xl"
+            className="w-full block rounded-2xl"
           />
         </motion.div>
       </div>
