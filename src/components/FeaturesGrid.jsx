@@ -12,9 +12,9 @@ const features = [
     desc: "Magic link reviews. No login for clients. Full version history.",
   },
   {
-    emoji: "🛡️",
+    emoji: "💬",
     name: "Internal Approvals",
-    desc: "Route drafts through your team for sign-off before a client ever sees them.",
+    desc: "Discuss and align internally — comments and @mentions on every draft — before a client ever sees it.",
   },
   {
     emoji: "📅",

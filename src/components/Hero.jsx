@@ -37,8 +37,8 @@ export function Hero() {
             className="text-base text-muted-foreground leading-[1.7] max-w-[480px] font-normal mx-auto mb-7"
           >
             Tercero replaces the fragmented stack of Notion, spreadsheets,
-            approval emails, and accounting tools. Assign work by role, review
-            internally before clients see a thing, and invoice — without
+            approval emails, and accounting tools. Assign work by role,
+            collaborate before clients see a thing, and invoice — without
             switching tabs.
           </motion.p>
 
