@@ -44,4 +44,8 @@
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 9999px; }
+
+  /* Custom cursor: hide the native pointer only when the custom one is active. */
+  html.has-custom-cursor,
+  html.has-custom-cursor * { cursor: none !important; }
 }
